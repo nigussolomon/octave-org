@@ -2,27 +2,32 @@ const { withNx } = require('@nx/rollup/with-nx');
 const url = require('@rollup/plugin-url');
 const svg = require('@svgr/rollup');
 
+const externalPackages = new Set([
+  'react',
+  'react-dom',
+  'react/jsx-runtime',
+  '@mantine/core',
+  '@mantine/form',
+  '@mantine/hooks',
+  '@mantine/notifications',
+]);
+
 module.exports = withNx(
   {
     main: './src/index.ts',
     outputPath: './dist',
     tsConfig: './tsconfig.lib.json',
     compiler: 'babel',
-    external: [
-      'react',
-      'react-dom',
-      'react/jsx-runtime',
-      '@mantine/core',
-      '@mantine/form',
-      '@mantine/hooks',
-      '@mantine/notifications',
-    ],
+    external: (id) =>
+      externalPackages.has(id) ||
+      id === 'react/jsx-dev-runtime' ||
+      id.startsWith('@mantine/'),
     preserveModules: true,
+    preserveModulesRoot: 'src',
     format: ['esm'],
     assets: [{ input: '.', output: '.', glob: 'README.md' }],
-    treeshake: {
-      moduleSideEffects: false,
-    },
+    treeshake: true,
+    moduleSideEffects: false,
   },
   {
     plugins: [

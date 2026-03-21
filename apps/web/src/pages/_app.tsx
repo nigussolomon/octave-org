@@ -1,13 +1,15 @@
 import Head from 'next/head';
 import {
+  createTheme,
+  MantineColorsTuple,
   OctaveProvider,
   OctaveShell,
   OctaveShellProps,
+  ThemeIcon,
   ThemeTrigger,
 } from '@octave-org/ui';
 import { DM_Sans } from 'next/font/google';
 import { AppProps } from 'next/app';
-import { createTheme, MantineColorsTuple, ThemeIcon } from '@mantine/core';
 import {
   IconAdjustments,
   IconCalendarStats,

@@ -1,6 +1,6 @@
-import { Flex, RadioGroup, Stack } from '@mantine/core';
 import {
   error,
+  Flex,
   info,
   OctaveButton,
   OctaveCheckboxInput,
@@ -10,6 +10,8 @@ import {
   OctaveSelectInput,
   OctaveShellProps,
   OctaveTextInput,
+  RadioGroup,
+  Stack,
   success,
   warning,
 } from '@octave-org/ui';

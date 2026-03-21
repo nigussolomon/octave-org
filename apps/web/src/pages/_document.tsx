@@ -1,5 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-import { ColorSchemeScript } from '@mantine/core';
+import { ColorSchemeScript } from '@octave-org/ui';
 
 export default function Document() {
   return (

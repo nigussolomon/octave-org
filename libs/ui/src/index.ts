@@ -1,8 +1,7 @@
-export * from './lib/provider';
-export * from './lib/input-components';
-export * from './lib/layout';
-export * from './lib/theme';
-export * from './lib/feedback';
-export * from './lib/text';
+export * from '@mantine/core';
+export * from '@mantine/form';
+export * from '@mantine/hooks';
+export * from '@mantine/notifications';
 
-export * from './lib/blocks/auth';
+export * from './components';
+export { OctaveProvider, UIProvider } from './lib/provider';

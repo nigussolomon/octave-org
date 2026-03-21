@@ -1,0 +1,46 @@
+name: Release UI Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version/tag (e.g., v0.0.1)'
+        required: true
+        default: 'v0.0.1'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: tree:0
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --no-cache
+
+      - name: Build UI library
+        run: bun nx build ui
+
+      - name: Pack UI library
+        run: |
+          cd libs/ui
+          bun pm pack || npm pack
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.event.inputs.version }}
+          name: UI Package ${{ github.event.inputs.version }}
+          artifacts: libs/ui/*.tgz
+          allowUpdates: true
+          replacesArtifacts: true
+          generateReleaseNotes: true

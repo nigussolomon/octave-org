@@ -1,0 +1,70 @@
+import {
+  Card,
+  Center,
+  Divider,
+  Flex,
+  Overlay,
+  SimpleGrid,
+  ThemeIcon,
+  useMantineColorScheme,
+} from '@mantine/core';
+import { IconGalaxy } from '@tabler/icons-react';
+import { OctaveStackedText } from '../../text';
+
+export interface OctaveAuthWrapperProps {
+  children: React.ReactNode;
+  flip?: boolean;
+}
+
+export function OctaveAuthWrapper(props: OctaveAuthWrapperProps) {
+  const { colorScheme } = useMantineColorScheme();
+  return (
+    <SimpleGrid p="md" cols={{ base: 1, md: 2 }} h="100vh">
+      {props.flip && props.children}
+      <Card bg="primary" h="100%" visibleFrom="md" pos="relative">
+        <Overlay style={{ zIndex: 1 }} blur={5} bg="transparent" />
+        <Flex style={{ zIndex: 0 }} pos="absolute" top={0} left={0}>
+          <Card radius={0} bg="primary.5" w="152px" h="400px" />
+          <Card radius={0} bg="primary.4" w="152px" h="330px" />
+          <Card radius={0} bg="primary.3" w="152px" h="260px" />
+          <Card radius={0} bg="primary.2" w="152px" h="190px" />
+          <Card radius={0} bg="primary.1" w="152px" h="120px" />
+          <Card radius={0} bg="primary.1" w="152px" h="50px" />
+        </Flex>
+        <Center style={{ zIndex: 10 }} w="100%" h="100%">
+          <Flex align="center" gap="xs">
+            <ThemeIcon variant="default" size={50}>
+              <IconGalaxy size={30} />
+            </ThemeIcon>
+            <Divider orientation="vertical" />
+            <OctaveStackedText
+              title="Octave Designs"
+              description="The ui system you deserve"
+              titleProps={{
+                c: colorScheme === 'light' ? 'white' : 'black',
+              }}
+              descProps={{
+                c: colorScheme === 'light' ? 'white' : 'black',
+              }}
+            />
+          </Flex>
+        </Center>
+        <Flex
+          style={{ zIndex: 0 }}
+          align="flex-end"
+          pos="absolute"
+          bottom={0}
+          right={0}
+        >
+          <Card radius={0} bg="primary.1" w="152px" h="50px" />
+          <Card radius={0} bg="primary.1" w="152px" h="120px" />
+          <Card radius={0} bg="primary.2" w="152px" h="190px" />
+          <Card radius={0} bg="primary.3" w="152px" h="260px" />
+          <Card radius={0} bg="primary.4" w="152px" h="330px" />
+          <Card radius={0} bg="primary.5" w="152px" h="400px" />
+        </Flex>
+      </Card>
+      {!props.flip && props.children}
+    </SimpleGrid>
+  );
+}

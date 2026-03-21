@@ -11,12 +11,6 @@
   ],
   "exports": {
     "./package.json": "./package.json",
-    "./utils": {
-      "@octave-org/source": "./src/utils/index.ts",
-      "types": "./dist/utils/index.d.ts",
-      "import": "./dist/utils/index.esm.js",
-      "default": "./dist/utils/index.esm.js"
-    },
     ".": {
       "@octave-org/source": "./src/index.ts",
       "types": "./dist/index.d.ts",

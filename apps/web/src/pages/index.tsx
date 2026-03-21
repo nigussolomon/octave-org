@@ -1,6 +1,7 @@
 import {
   error,
   Flex,
+  formatETB,
   info,
   OctaveButton,
   OctaveCheckboxInput,
@@ -13,6 +14,7 @@ import {
   RadioGroup,
   Stack,
   success,
+  Text,
   warning,
 } from '@octave-org/ui';
 
@@ -116,6 +118,7 @@ const Home: OctaveShellProps = () => {
           </Stack>
         </RadioGroup>
       </Flex>
+      <Text>{formatETB(200)}</Text>
     </Stack>
   );
 };

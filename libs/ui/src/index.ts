@@ -4,4 +4,5 @@ export * from '@mantine/hooks';
 export * from '@mantine/notifications';
 
 export * from './components';
+export * from './utils';
 export { OctaveProvider, UIProvider } from './lib/provider';

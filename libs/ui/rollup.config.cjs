@@ -5,6 +5,8 @@ const svg = require('@svgr/rollup');
 const externalPackages = new Set([
   'react',
   'react-dom',
+  'next',
+  'next/link',
   'react/jsx-runtime',
   '@mantine/core',
   '@mantine/form',

@@ -6,7 +6,8 @@
     "check": "bun nx run-many -t lint test build typecheck --exclude=web"
   },
   "private": true,
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@mantine/core": "^8.3.18",
     "@mantine/form": "^8.3.18",
     "@mantine/hooks": "^8.3.18",
@@ -14,9 +15,7 @@
     "@tabler/icons-react": "^3.40.0",
     "next": "^16.2.0",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4"
-  },
-  "devDependencies": {
+    "react-dom": "^19.2.4",
     "@babel/core": "^7.29.0",
     "@babel/preset-react": "^7.28.5",
     "@eslint/js": "^10.0.1",

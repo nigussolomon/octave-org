@@ -8,7 +8,6 @@ module.exports = withNx(
     outputPath: './dist',
     tsConfig: './tsconfig.lib.json',
     compiler: 'babel',
-    // 2. Add Mantine to external so it's not bundled into your lib
     external: [
       'react',
       'react-dom',
@@ -18,8 +17,12 @@ module.exports = withNx(
       '@mantine/hooks',
       '@mantine/notifications',
     ],
+    preserveModules: true,
     format: ['esm'],
     assets: [{ input: '.', output: '.', glob: 'README.md' }],
+    treeshake: {
+      moduleSideEffects: false,
+    },
   },
   {
     plugins: [

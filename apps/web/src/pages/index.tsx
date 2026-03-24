@@ -365,6 +365,36 @@ const Home: OctaveShellProps = () => {
             lastName: 'Doe',
             status: '',
           },
+          {
+            firstName: 'John',
+            lastName: 'Doe',
+            status: '',
+          },
+          {
+            firstName: 'John',
+            lastName: 'Doe',
+            status: '',
+          },
+          {
+            firstName: 'John',
+            lastName: 'Doe',
+            status: '',
+          },
+          {
+            firstName: 'John',
+            lastName: 'Doe',
+            status: '',
+          },
+          {
+            firstName: 'John',
+            lastName: 'Doe',
+            status: '',
+          },
+          {
+            firstName: 'John',
+            lastName: 'Doe',
+            status: '',
+          },
         ]}
         columns={columns}
       />

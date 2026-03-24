@@ -39,6 +39,7 @@ import {
 } from '@dnd-kit/sortable';
 
 import { CSS } from '@dnd-kit/utilities';
+import { useBreakpoints } from '../../utils';
 
 export interface OctaveCol<T> {
   key: keyof T;
@@ -156,6 +157,7 @@ export function OctaveTable<T>({
   pagination,
   leftSection,
 }: OctaveTableProps<T>) {
+  const { isMobile } = useBreakpoints();
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [columnOrder, setColumnOrder] = useState<string[]>(
     columns.map((c) => c.key as string),
@@ -179,6 +181,47 @@ export function OctaveTable<T>({
       prev.includes(key) ? prev.filter((i) => i !== key) : [...prev, key],
     );
   };
+
+  if (isMobile) {
+    if (loading) {
+      return <LoadingTable />;
+    }
+    if (data?.length === 0) {
+      return <EmptyTable />;
+    }
+    return data?.map((d: T) => (
+      <Stack>
+        <Card p={0} withBorder>
+          <Table
+            variant="vertical"
+            layout="fixed"
+            verticalSpacing="md"
+            horizontalSpacing="md"
+            withColumnBorders
+            withRowBorders
+          >
+            <Table.Tbody>
+              {visibleColumns?.map((col) => (
+                <Table.Tr key={col.key as string}>
+                  <Table.Th w={160}>{col.label}</Table.Th>
+                  <Table.Td key={col.key as string}>
+                    {col.render
+                      ? col.render(d[col.key], d)
+                      : (d[col.key] as React.ReactNode)}
+                  </Table.Td>
+                </Table.Tr>
+              ))}
+            </Table.Tbody>
+          </Table>
+        </Card>
+        <Flex justify="center">
+          {pagination && (
+            <Pagination size="xs" {...pagination} {...pagination.props} />
+          )}
+        </Flex>
+      </Stack>
+    ));
+  }
 
   return (
     <Stack>

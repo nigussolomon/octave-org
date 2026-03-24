@@ -11,7 +11,7 @@ export function ThemeTrigger() {
 
   return (
     <ActionIcon
-      size="xl"
+      size="lg"
       variant="default"
       onClick={() => setColorScheme(colorScheme === 'light' ? 'dark' : 'light')}
     >

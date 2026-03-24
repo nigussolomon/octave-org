@@ -1,8 +1,10 @@
 import {
+  ActionIcon,
   error,
   Flex,
-  formatETB,
   info,
+  OctaveBadge,
+  OctaveBanner,
   OctaveButton,
   OctaveCheckboxInput,
   OctaveNumberInput,
@@ -10,13 +12,34 @@ import {
   OctaveSecureInput,
   OctaveSelectInput,
   OctaveShellProps,
+  OctaveStatCard,
+  OctaveStatusBadge,
   OctaveTextInput,
   RadioGroup,
   Stack,
   success,
-  Text,
   warning,
 } from '@octave-org/ui';
+import {
+  IconBrandTabler,
+  IconCheck,
+  IconClock,
+  IconMessageCircle2,
+  IconProps,
+  IconX,
+} from '@tabler/icons-react';
+
+const statusColorMap: Record<string, string> = {
+  pending: 'orange',
+  completed: 'green',
+  failed: 'red',
+};
+
+const statusIconMap: Record<string, React.FC<IconProps>> = {
+  pending: IconClock,
+  completed: IconCheck,
+  failed: IconX,
+};
 
 const Home: OctaveShellProps = () => {
   return (
@@ -101,7 +124,7 @@ const Home: OctaveShellProps = () => {
           description="Enter your password here"
         />
       </Flex>
-      <Flex wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
+      <Flex align="center" wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
         <Stack>
           <OctaveCheckboxInput
             label="Checkbox Input"
@@ -117,8 +140,148 @@ const Home: OctaveShellProps = () => {
             />
           </Stack>
         </RadioGroup>
+        <Flex wrap="wrap" gap="xs">
+          <OctaveBadge color="blue" variant="dot" label="Hello World" />
+          <OctaveBadge color="green" variant="dot" label="Hello World" />
+          <OctaveBadge color="orange" variant="dot" label="Hello World" />
+          <OctaveBadge color="red" variant="dot" label="Hello World" />
+        </Flex>
+        <Flex wrap="wrap" gap="xs">
+          <OctaveStatusBadge
+            label="pending"
+            colorMap={statusColorMap}
+            iconMap={statusIconMap}
+          />
+          <OctaveStatusBadge
+            label="completed"
+            colorMap={statusColorMap}
+            iconMap={statusIconMap}
+          />
+          <OctaveStatusBadge
+            label="failed"
+            colorMap={statusColorMap}
+            iconMap={statusIconMap}
+          />
+          <OctaveStatusBadge
+            label="unknown"
+            colorMap={statusColorMap}
+            iconMap={statusIconMap}
+          />
+        </Flex>
       </Flex>
-      <Text>{formatETB(200)}</Text>
+      <OctaveBanner
+        icon={IconMessageCircle2}
+        stackedTextProps={{
+          title: 'Hello There',
+          description: 'This is a simple test banner',
+        }}
+        cardProps={{
+          withBorder: true,
+        }}
+        actions={
+          <Flex gap="xs">
+            <ActionIcon size="xl" variant="default">
+              <IconMessageCircle2 size={20} stroke={1} />
+            </ActionIcon>
+          </Flex>
+        }
+      />
+      <OctaveBanner
+        cardProps={{
+          bg: 'green.0',
+          withBorder: true,
+          style: { borderColor: 'green', borderWidth: 2 },
+        }}
+        icon={IconMessageCircle2}
+        stackedTextProps={{
+          title: 'Hello There',
+          description: 'This is a simple test banner',
+          titleProps: { c: 'green.9' },
+        }}
+        actions={
+          <Flex gap="xs">
+            <ActionIcon size="xl" variant="default">
+              <IconMessageCircle2 size={20} stroke={1} />
+            </ActionIcon>
+            <ActionIcon size="xl" variant="default">
+              <IconMessageCircle2 size={20} stroke={1} />
+            </ActionIcon>
+            <ActionIcon size="xl" variant="default">
+              <IconMessageCircle2 size={20} stroke={1} />
+            </ActionIcon>
+            <ActionIcon size="xl" variant="default">
+              <IconMessageCircle2 size={20} stroke={1} />
+            </ActionIcon>
+          </Flex>
+        }
+      />
+      <OctaveBanner
+        cardProps={{
+          bg: 'red.1',
+          withBorder: true,
+          style: { borderColor: 'red' },
+        }}
+        icon={IconMessageCircle2}
+        stackedTextProps={{
+          title: 'Hello There',
+          description: 'This is a simple test banner',
+          titleProps: { c: 'red.9' },
+        }}
+        actions={
+          <Flex gap="xs">
+            <ActionIcon size="xl" variant="default">
+              <IconMessageCircle2 size={20} stroke={1} />
+            </ActionIcon>
+            <ActionIcon size="xl" variant="default">
+              <IconMessageCircle2 size={20} stroke={1} />
+            </ActionIcon>
+            <ActionIcon size="xl" variant="default">
+              <IconMessageCircle2 size={20} stroke={1} />
+            </ActionIcon>
+            <ActionIcon size="xl" variant="default">
+              <IconMessageCircle2 size={20} stroke={1} />
+            </ActionIcon>
+          </Flex>
+        }
+      />
+      <Flex wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
+        <OctaveStatCard
+          icon={IconBrandTabler}
+          title="Example Stat"
+          description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+          direction="up"
+          value={0.2}
+          isValuePercent
+          color="green"
+        />
+        <OctaveStatCard
+          icon={IconBrandTabler}
+          title="Example Stat"
+          description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+          direction="down"
+          value={0.2}
+          isValuePercent
+          color="orange"
+        />
+        <OctaveStatCard
+          icon={IconBrandTabler}
+          title="Example Stat"
+          description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+          direction="up"
+          value={0.2}
+          isValuePercent
+          color="red"
+        />
+      </Flex>
+      <OctaveStatCard
+        icon={IconBrandTabler}
+        title="Example Stat"
+        description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+        direction="neutral"
+        value={0.2}
+        isValuePercent
+        color="blue"
+      />
     </Stack>
   );
 };

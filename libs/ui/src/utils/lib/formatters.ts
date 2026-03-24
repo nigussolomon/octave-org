@@ -25,7 +25,7 @@ export function floatToPercent(value: string | number) {
     value = parseFloat(value);
   }
   if (!Number.isFinite(value)) return 0;
-  return `${(value * 100).toFixed(2)}%`;
+  return `${(value * 100).toFixed(0)}%`;
 }
 
 export function formatDate(value: string) {

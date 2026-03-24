@@ -3,10 +3,12 @@ import {
   error,
   Flex,
   info,
+  Menu,
   OctaveBadge,
   OctaveBanner,
   OctaveButton,
   OctaveCheckboxInput,
+  OctaveCol,
   OctaveNumberInput,
   OctaveRadioInput,
   OctaveSecureInput,
@@ -14,6 +16,7 @@ import {
   OctaveShellProps,
   OctaveStatCard,
   OctaveStatusBadge,
+  OctaveTable,
   OctaveTextInput,
   RadioGroup,
   Stack,
@@ -28,6 +31,7 @@ import {
   IconProps,
   IconX,
 } from '@tabler/icons-react';
+import { useState } from 'react';
 
 const statusColorMap: Record<string, string> = {
   pending: 'orange',
@@ -41,7 +45,36 @@ const statusIconMap: Record<string, React.FC<IconProps>> = {
   failed: IconX,
 };
 
+const columns: OctaveCol<{
+  firstName: string;
+  lastName: string;
+  status: string;
+}>[] = [
+  {
+    key: 'firstName',
+    label: 'First Name',
+    labelProps: { c: 'gray.9' },
+    headerActions: (
+      <Stack>
+        <Menu.Item>Hello</Menu.Item>
+      </Stack>
+    ),
+  },
+  {
+    key: 'lastName',
+    label: 'Last Name',
+    labelProps: { c: 'gray.9' },
+  },
+  {
+    key: 'status',
+    label: 'Status',
+    labelProps: { c: 'gray.9' },
+  },
+];
+
 const Home: OctaveShellProps = () => {
+  const [page, setPage] = useState<number>(1);
+
   return (
     <Stack>
       <Flex wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
@@ -281,6 +314,59 @@ const Home: OctaveShellProps = () => {
         value={0.2}
         isValuePercent
         color="blue"
+      />
+      <OctaveTable
+        loading
+        data={[
+          {
+            firstName: 'John',
+            lastName: 'Doe',
+            status: '',
+          },
+        ]}
+        columns={columns}
+        pagination={{
+          total: 100,
+          page: page,
+          pageSize: 10,
+          onPageChange: (page) => setPage(page),
+        }}
+      />
+      <OctaveTable
+        data={[
+          {
+            firstName: 'John',
+            lastName: 'Doe',
+            status: '',
+          },
+        ]}
+        columns={columns}
+        pagination={{
+          total: 100,
+          page: page,
+          pageSize: 10,
+          onPageChange: (page) => setPage(page),
+        }}
+      />
+      <OctaveTable
+        data={[]}
+        columns={columns}
+        pagination={{
+          total: 100,
+          page: page,
+          pageSize: 10,
+          onPageChange: (page) => setPage(page),
+        }}
+      />
+      <OctaveTable
+        data={[
+          {
+            firstName: 'John',
+            lastName: 'Doe',
+            status: '',
+          },
+        ]}
+        columns={columns}
       />
     </Stack>
   );

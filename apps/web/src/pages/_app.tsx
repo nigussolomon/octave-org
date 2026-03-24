@@ -6,7 +6,6 @@ import {
   OctaveShell,
   OctaveShellProps,
   ThemeIcon,
-  ThemeTrigger,
 } from '@octave-org/ui';
 import { DM_Sans } from 'next/font/google';
 import { AppProps } from 'next/app';
@@ -120,15 +119,6 @@ export default function App({ Component, pageProps }: ShellLayoutProps) {
       </Head>
 
       <OctaveProvider theme={octaveTheme}>
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 10,
-            right: 10,
-          }}
-        >
-          <ThemeTrigger />
-        </div>
         <OctaveShell
           props={{
             disabled: Component.disabled,

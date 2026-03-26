@@ -8,10 +8,18 @@ A UI component library built on top of [Mantine](https://mantine.dev), designed 
 
 ## Installation
 
-Install the package and its peer dependencies:
-
 ```bash
-npm install @octave-org/ui @mantine/core @mantine/hooks @mantine/form @mantine/notifications
+# npm
+npm install @octave-org/ui
+
+# yarn
+yarn add @octave-org/ui
+
+# pnpm
+pnpm add @octave-org/ui
+
+# bun
+bun add @octave-org/ui
 ```
 
 ---
@@ -88,7 +96,3 @@ You can also render the button as a link:
 ```
 
 ---
-
-## Running unit tests
-
-Run `nx test @octave-org/ui` to execute the unit tests via [Jest](https://jestjs.io).

@@ -14,7 +14,7 @@ export function OctaveStackedText({
   descProps,
 }: OctaveStackedTextProps) {
   return (
-    <Stack gap={0}>
+    <Stack justify="center" gap={0}>
       <Text size="xl" fw={700} {...titleProps}>
         {title}
       </Text>

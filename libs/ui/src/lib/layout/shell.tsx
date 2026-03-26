@@ -24,6 +24,7 @@ import { NextPage } from 'next/dist/types';
 import { LinksGroup, LinksGroupProps } from './nav-links';
 import { useBreakpoints } from '../../utils';
 import { ThemeTrigger } from '../theme';
+import { OctaveBranding, useOctaveBranding } from '../branding';
 
 export type OctaveShellProps = {
   disablePadding?: boolean;
@@ -47,13 +48,15 @@ export function OctaveShell({
   logo,
   user,
   menu,
+  branding,
 }: {
   children: React.ReactNode;
   props: OctaveShellProps;
-  title: string;
-  subTitle: string;
+  title?: string;
+  subTitle?: string;
   logo?: React.ReactNode;
   menu: LinksGroupProps[];
+  branding?: OctaveBranding;
   user?: {
     fullName: string;
     contact: string;
@@ -62,6 +65,7 @@ export function OctaveShell({
 }) {
   const [opened, { toggle }] = useDisclosure();
   const { setColorScheme, colorScheme } = useMantineColorScheme();
+  const appBranding = useOctaveBranding(branding);
   const icon = {
     light: <IconSun size={18} />,
     dark: <IconMoon size={18} />,
@@ -77,9 +81,9 @@ export function OctaveShell({
       {logo}
       {(opened || isMobile) && (
         <Stack gap={0}>
-          <Text fw={600}>{title}</Text>
+          <Text fw={600}>{title ?? appBranding.companyName}</Text>
           <Text size="xs" c="dimmed">
-            {subTitle}
+            {subTitle ?? appBranding.slogan}
           </Text>
         </Stack>
       )}

@@ -10,14 +10,18 @@ import {
 } from '@mantine/core';
 import { IconGalaxy } from '@tabler/icons-react';
 import { OctaveStackedText } from '../../text';
+import { OctaveBranding, useOctaveBranding } from '../../branding';
 
 export interface OctaveAuthWrapperProps {
   children: React.ReactNode;
   flip?: boolean;
+  branding?: OctaveBranding;
 }
 
 export function OctaveAuthWrapper(props: OctaveAuthWrapperProps) {
   const { colorScheme } = useMantineColorScheme();
+  const branding = useOctaveBranding(props.branding);
+
   return (
     <SimpleGrid p="md" cols={{ base: 1, md: 2 }} h="100vh">
       {props.flip && props.children}
@@ -38,8 +42,8 @@ export function OctaveAuthWrapper(props: OctaveAuthWrapperProps) {
             </ThemeIcon>
             <Divider orientation="vertical" />
             <OctaveStackedText
-              title="Octave Designs"
-              description="The ui system you deserve"
+              title={branding.companyName}
+              description={branding.slogan}
               titleProps={{
                 c: colorScheme === 'light' ? 'white' : 'black',
               }}

@@ -8,6 +8,7 @@ import {
 import { OctaveButton, OctaveButtonContext } from '../../input-components';
 import { OctaveStackedText } from '../../text';
 import { OctaveLinkedText } from '../../text/linkedText';
+import { OctaveBranding } from '../../branding';
 
 export interface AuthFormRow<T extends object> {
   columns: FormFieldConfig<T>[][];
@@ -17,6 +18,7 @@ export interface AuthFormConfig<T extends object> {
   title: string;
   description: string;
   icon?: React.ReactNode;
+  branding?: OctaveBranding;
 
   rows?: AuthFormRow<T>[];
   fields?: FormFieldConfig<T>[];
@@ -53,7 +55,7 @@ export function OctaveAuthForm<T extends object>({
   const form = useForm<T>({ initialValues, validate });
 
   return (
-    <OctaveAuthWrapper>
+    <OctaveAuthWrapper branding={config.branding}>
       <Center w="100%" h="100%">
         <Stack align="center">
           {config.icon}

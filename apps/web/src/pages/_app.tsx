@@ -58,6 +58,11 @@ export const octaveTheme = createTheme({
   fontFamily: 'DM Sans, sans-serif',
 });
 
+const appBranding = {
+  companyName: 'Octave Labs',
+  slogan: 'Secure access for modern teams',
+};
+
 type ShellLayoutProps = AppProps & {
   Component: OctaveShellProps;
 };
@@ -111,14 +116,14 @@ export default function App({ Component, pageProps }: ShellLayoutProps) {
   return (
     <main className={dmSans.className}>
       <Head>
-        <title>Octave Admin Dashboard</title>
+        <title>{appBranding.companyName}</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </Head>
 
-      <OctaveProvider theme={octaveTheme}>
+      <OctaveProvider theme={octaveTheme} branding={appBranding}>
         <OctaveShell
           props={{
             disabled: Component.disabled,
@@ -129,14 +134,12 @@ export default function App({ Component, pageProps }: ShellLayoutProps) {
           }}
           menu={mockdata}
           user={{
-            contact: 'nigus@octave.com',
+            contact: 'hello@octavelabs.com',
             fullName: 'Nigus Octave',
             logout: () => {
               console.log('Logout');
             },
           }}
-          title="CompanyTitle"
-          subTitle="CompanySlogan"
           logo={
             <ThemeIcon size="xl">
               <IconGalaxy />

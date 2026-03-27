@@ -1,22 +1,20 @@
-import {
-  createContext,
-  PropsWithChildren,
-  useContext,
-} from 'react';
+import { IconGalaxy } from '@tabler/icons-react';
+import { createContext, PropsWithChildren, useContext } from 'react';
 
 export interface OctaveBranding {
   companyName?: string;
   slogan?: string;
+  logo?: React.ReactNode;
 }
 
 const defaultBranding: Required<OctaveBranding> = {
   companyName: 'Octave Designs',
   slogan: 'The ui system you deserve',
+  logo: <IconGalaxy />,
 };
 
-const OctaveBrandingContext = createContext<Required<OctaveBranding>>(
-  defaultBranding,
-);
+const OctaveBrandingContext =
+  createContext<Required<OctaveBranding>>(defaultBranding);
 
 export function OctaveBrandingProvider({
   children,
@@ -27,6 +25,7 @@ export function OctaveBrandingProvider({
       value={{
         companyName: branding?.companyName ?? defaultBranding.companyName,
         slogan: branding?.slogan ?? defaultBranding.slogan,
+        logo: branding?.logo ?? defaultBranding.logo,
       }}
     >
       {children}
@@ -40,5 +39,6 @@ export function useOctaveBranding(overrides?: OctaveBranding) {
   return {
     companyName: overrides?.companyName ?? branding.companyName,
     slogan: overrides?.slogan ?? branding.slogan,
+    logo: overrides?.logo ?? branding.logo,
   };
 }

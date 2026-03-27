@@ -61,6 +61,11 @@ export const octaveTheme = createTheme({
 const appBranding = {
   companyName: 'Octave Labs',
   slogan: 'Secure access for modern teams',
+  logo: (
+    <ThemeIcon variant="default" size={50}>
+      <IconGalaxy />
+    </ThemeIcon>
+  ),
 };
 
 type ShellLayoutProps = AppProps & {
@@ -140,11 +145,6 @@ export default function App({ Component, pageProps }: ShellLayoutProps) {
               console.log('Logout');
             },
           }}
-          logo={
-            <ThemeIcon size="xl">
-              <IconGalaxy />
-            </ThemeIcon>
-          }
         >
           <Component {...pageProps} />
         </OctaveShell>

@@ -78,7 +78,7 @@ export function OctaveShell({
 
   const NavLogo = () => (
     <Flex gap="xs" align="center">
-      {logo}
+      {appBranding.logo}
       {(opened || isMobile) && (
         <Stack gap={0}>
           <Text fw={600}>{title ?? appBranding.companyName}</Text>

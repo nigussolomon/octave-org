@@ -5,10 +5,8 @@ import {
   Flex,
   Overlay,
   SimpleGrid,
-  ThemeIcon,
   useMantineColorScheme,
 } from '@mantine/core';
-import { IconGalaxy } from '@tabler/icons-react';
 import { OctaveStackedText } from '../../text';
 import { OctaveBranding, useOctaveBranding } from '../../branding';
 
@@ -37,9 +35,8 @@ export function OctaveAuthWrapper(props: OctaveAuthWrapperProps) {
         </Flex>
         <Center style={{ zIndex: 10 }} w="100%" h="100%">
           <Flex align="center" gap="xs">
-            <ThemeIcon variant="default" size={50}>
-              <IconGalaxy size={30} />
-            </ThemeIcon>
+            {branding.logo}
+
             <Divider orientation="vertical" />
             <OctaveStackedText
               title={branding.companyName}

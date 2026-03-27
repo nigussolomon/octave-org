@@ -50,7 +50,6 @@ export function LinksGroup({
         paddingLeft: theme.spacing.md,
         marginLeft: theme.spacing.xl,
         fontSize: theme.fontSizes.sm,
-        color: isDark ? theme.colors.dark[0] : theme.colors.gray[7],
         borderLeft: `1px solid ${
           isDark ? theme.colors.dark[4] : theme.colors.gray[3]
         }`,
@@ -80,7 +79,6 @@ export function LinksGroup({
           fontWeight: 500,
           padding: `${theme.spacing.xs} ${theme.spacing.md}`,
           fontSize: theme.fontSizes.sm,
-          color: isDark ? theme.white : theme.black,
           backgroundColor: controlHovered
             ? isDark
               ? theme.colors.dark[7]

@@ -1,6 +1,6 @@
 {
   "name": "@octave-org/source",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "check": "bun nx run-many -t lint test build typecheck --exclude=web"

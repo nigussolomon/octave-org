@@ -250,7 +250,7 @@ export function OctaveShell({
         <AppShell.Section h={60} w="100%" px="xs">
           <Stack
             w="100%"
-            h={60}
+            h={70}
             justify="center"
             align={opened ? 'flex-start' : 'center'}
           >
@@ -259,7 +259,7 @@ export function OctaveShell({
         </AppShell.Section>
       </AppShell.Navbar>
       <AppShell.Main>
-        <ScrollArea type="never" h="97vh">
+        <ScrollArea type="never" h="96vh">
           {children}
         </ScrollArea>
       </AppShell.Main>

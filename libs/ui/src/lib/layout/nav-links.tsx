@@ -57,7 +57,7 @@ export function LinksGroup({
           hoveredLink === link.label
             ? isDark
               ? theme.colors.dark[7]
-              : theme.colors.gray[0]
+              : theme.colors.gray[1]
             : 'transparent',
       }}
     >
@@ -80,11 +80,11 @@ export function LinksGroup({
           borderRadius: theme.spacing.xs,
           padding: `${theme.spacing.xs}`,
           fontSize: theme.fontSizes.sm,
-          color: isDark ? 'white' : 'black',
+          color: controlHovered ? 'white' : isDark ? 'white' : 'black',
           backgroundColor: controlHovered
             ? isDark
-              ? theme.colors.dark[7]
-              : theme.colors.gray[0]
+              ? theme.colors.primary[8]
+              : theme.colors.primary[6]
             : 'transparent',
         }}
       >

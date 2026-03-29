@@ -13,6 +13,7 @@ import {
   Text,
   TextProps,
   useMantineColorScheme,
+  useMantineTheme,
 } from '@mantine/core';
 import {
   IconEye,
@@ -94,17 +95,33 @@ function SortableHeader<T>({
   toggleHide: (key: string) => void;
   visibleColumns: OctaveCol<T>[];
 }) {
+  const theme = useMantineTheme();
   const { colorScheme } = useMantineColorScheme();
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: col.key as string });
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: transform
+      ? CSS.Transform.toString({
+          x: transform.x,
+          y: transform.y,
+          scaleX: 1,
+          scaleY: 1,
+        })
+      : undefined,
     transition,
   };
 
   return (
-    <Table.Th py="sm" ref={setNodeRef} {...attributes} style={{ ...style }}>
+    <Table.Th
+      py="sm"
+      ref={setNodeRef}
+      {...attributes}
+      bg={colorScheme === 'dark' ? 'dark' : 'white'}
+      style={{
+        ...style,
+      }}
+    >
       <Flex gap="md" justify="space-between" align="center">
         <Flex align="center" gap={8}>
           <ActionIcon
@@ -257,7 +274,13 @@ export function OctaveTable<T>({
             }
           }}
         >
-          <Table verticalSpacing="xs" horizontalSpacing="md" withRowBorders>
+          <Table
+            highlightOnHover
+            striped
+            verticalSpacing="xs"
+            horizontalSpacing="md"
+            withRowBorders
+          >
             <Table.Thead>
               <SortableContext
                 items={visibleColumns.map((c) => c.key as string)}

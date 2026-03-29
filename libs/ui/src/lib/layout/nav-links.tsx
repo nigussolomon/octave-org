@@ -77,8 +77,10 @@ export function LinksGroup({
           display: 'block',
           width: '100%',
           fontWeight: 500,
-          padding: `${theme.spacing.xs} ${theme.spacing.md}`,
+          borderRadius: theme.spacing.xs,
+          padding: `${theme.spacing.xs}`,
           fontSize: theme.fontSizes.sm,
+          color: isDark ? 'white' : 'black',
           backgroundColor: controlHovered
             ? isDark
               ? theme.colors.dark[7]
@@ -86,9 +88,12 @@ export function LinksGroup({
             : 'transparent',
         }}
       >
-        <Group justify={shellOpened ? 'space-between' : 'center'} gap={0}>
+        <Group
+          justify={shellOpened ? 'space-between' : 'center'}
+          gap={shellOpened ? 'space-between' : 'center'}
+        >
           <Box style={{ display: 'flex', alignItems: 'center' }}>
-            <ThemeIcon variant="light" size={35}>
+            <ThemeIcon size={35}>
               <Icon size={18} />
             </ThemeIcon>
             {shellOpened && <Box ml="md">{label}</Box>}

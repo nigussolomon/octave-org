@@ -5,7 +5,6 @@ import {
   info,
   Menu,
   OctaveBadge,
-  OctaveBanner,
   OctaveButton,
   OctaveCheckboxInput,
   OctaveCol,
@@ -202,103 +201,21 @@ const Home: OctaveShellProps = () => {
           />
         </Flex>
       </Flex>
-      <OctaveBanner
-        icon={IconMessageCircle2}
-        stackedTextProps={{
-          title: 'Hello There',
-          description: 'This is a simple test banner',
-        }}
-        cardProps={{
-          withBorder: true,
-        }}
-        actions={
-          <Flex gap="xs">
-            <ActionIcon size="xl" variant="default">
-              <IconMessageCircle2 size={20} stroke={1} />
-            </ActionIcon>
-          </Flex>
-        }
-      />
-      <OctaveBanner
-        cardProps={{
-          bg: 'green.0',
-          withBorder: true,
-          style: { borderColor: 'green', borderWidth: 2 },
-        }}
-        icon={IconMessageCircle2}
-        stackedTextProps={{
-          title: 'Hello There',
-          description: 'This is a simple test banner',
-          titleProps: { c: 'green.9' },
-        }}
-        actions={
-          <Flex gap="xs">
-            <ActionIcon size="xl" variant="default">
-              <IconMessageCircle2 size={20} stroke={1} />
-            </ActionIcon>
-            <ActionIcon size="xl" variant="default">
-              <IconMessageCircle2 size={20} stroke={1} />
-            </ActionIcon>
-            <ActionIcon size="xl" variant="default">
-              <IconMessageCircle2 size={20} stroke={1} />
-            </ActionIcon>
-            <ActionIcon size="xl" variant="default">
-              <IconMessageCircle2 size={20} stroke={1} />
-            </ActionIcon>
-          </Flex>
-        }
-      />
-      <OctaveBanner
-        cardProps={{
-          bg: 'red.1',
-          withBorder: true,
-          style: { borderColor: 'red' },
-        }}
-        icon={IconMessageCircle2}
-        stackedTextProps={{
-          title: 'Hello There',
-          description: 'This is a simple test banner',
-          titleProps: { c: 'red.9' },
-        }}
-        actions={
-          <Flex gap="xs">
-            <ActionIcon size="xl" variant="default">
-              <IconMessageCircle2 size={20} stroke={1} />
-            </ActionIcon>
-            <ActionIcon size="xl" variant="default">
-              <IconMessageCircle2 size={20} stroke={1} />
-            </ActionIcon>
-            <ActionIcon size="xl" variant="default">
-              <IconMessageCircle2 size={20} stroke={1} />
-            </ActionIcon>
-            <ActionIcon size="xl" variant="default">
-              <IconMessageCircle2 size={20} stroke={1} />
-            </ActionIcon>
-          </Flex>
-        }
-      />
+
       <Flex wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
         <OctaveStatCard
           icon={IconBrandTabler}
           title="Example Stat"
-          description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+          description="This is an example stat description that will allow users to test and see how the stat card looks."
           direction="up"
           value={0.2}
           isValuePercent
-          color="green"
+          color="primary"
         />
         <OctaveStatCard
           icon={IconBrandTabler}
           title="Example Stat"
-          description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
-          direction="up"
-          value={0.2}
-          isValuePercent
-        />
-        <OctaveStatCard
-          icon={IconBrandTabler}
-          title="Example Stat"
-          description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+          description="This is an example stat description that will allow users to test and see how the stat card looks."
           direction="up"
           value={0.2}
           isValuePercent
@@ -306,7 +223,15 @@ const Home: OctaveShellProps = () => {
         <OctaveStatCard
           icon={IconBrandTabler}
           title="Example Stat"
-          description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+          description="This is an example stat description that will allow users to test and see how the stat card looks."
+          direction="up"
+          value={0.2}
+          isValuePercent
+        />
+        <OctaveStatCard
+          icon={IconBrandTabler}
+          title="Example Stat"
+          description="This is an example stat description that will allow users to test and see how the stat card looks."
           direction="down"
           value={0.2}
           isValuePercent
@@ -315,7 +240,7 @@ const Home: OctaveShellProps = () => {
         <OctaveStatCard
           icon={IconBrandTabler}
           title="Example Stat"
-          description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+          description="This is an example stat description that will allow users to test and see how the stat card looks."
           direction="up"
           value={0.2}
           isValuePercent
@@ -325,7 +250,7 @@ const Home: OctaveShellProps = () => {
       <OctaveStatCard
         icon={IconBrandTabler}
         title="Example Stat"
-        description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+        description="This is an example stat description that will allow users to test and see how the stat card looks."
         direction="neutral"
         value={0.2}
         isValuePercent

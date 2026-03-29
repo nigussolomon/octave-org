@@ -79,7 +79,9 @@ function LoadingTable() {
   return (
     <Stack w="100%" mih={150} justify="center" align="center">
       <Loader type="bars" />
-      <Text c="dimmed">Table is loading.</Text>
+      <Text size="xs" c="dimmed">
+        Table is loading.
+      </Text>
     </Stack>
   );
 }
@@ -103,7 +105,7 @@ function SortableHeader<T>({
   };
 
   return (
-    <Table.Th ref={setNodeRef} {...attributes} style={style}>
+    <Table.Th py="sm" ref={setNodeRef} {...attributes} style={{ ...style }}>
       <Flex gap="md" justify="space-between" align="center">
         <Flex align="center" gap={8}>
           <ActionIcon
@@ -115,9 +117,10 @@ function SortableHeader<T>({
             <IconGripVertical size={14} />
           </ActionIcon>
           <Text
-            c={colorScheme === 'dark' ? 'dark' : 'white'}
-            fw={700}
+            fw={500}
+            size="sm"
             {...col.labelProps}
+            c={colorScheme === 'dark' ? 'white' : 'black'}
           >
             {col.label}
           </Text>
@@ -195,9 +198,7 @@ export function OctaveTable<T>({
           <Table
             variant="vertical"
             layout="fixed"
-            verticalSpacing="md"
             horizontalSpacing="md"
-            withColumnBorders
             withRowBorders
           >
             <Table.Tbody>
@@ -226,17 +227,19 @@ export function OctaveTable<T>({
   return (
     <Stack>
       <Flex align="center" justify="space-between">
-        <Box>{leftSection}</Box>
-        <MultiSelect
-          miw={200}
-          label="Hidden columns"
-          data={columns.map((col) => ({
-            value: col.key as string,
-            label: col.label,
-          }))}
-          value={hiddenColumns}
-          onChange={setHiddenColumns}
-        />
+        <div>{leftSection}</div>
+        {hiddenColumns.length > 0 && (
+          <MultiSelect
+            miw={200}
+            label="Hidden columns"
+            data={columns.map((col) => ({
+              value: col.key as string,
+              label: col.label,
+            }))}
+            value={hiddenColumns}
+            onChange={setHiddenColumns}
+          />
+        )}
       </Flex>
 
       <Card p={0} withBorder>
@@ -255,12 +258,7 @@ export function OctaveTable<T>({
             }
           }}
         >
-          <Table
-            verticalSpacing="md"
-            horizontalSpacing="md"
-            withColumnBorders
-            withRowBorders
-          >
+          <Table verticalSpacing="xs" horizontalSpacing="md" withRowBorders>
             <Table.Thead>
               <SortableContext
                 items={visibleColumns.map((c) => c.key as string)}

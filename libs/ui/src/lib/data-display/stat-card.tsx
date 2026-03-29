@@ -1,12 +1,13 @@
 import {
   Card,
+  CardProps,
   Flex,
   Stack,
   Text,
   TextProps,
+  ThemeIcon,
   Title,
   TitleProps,
-  useMantineColorScheme,
 } from '@mantine/core';
 import { IconArrowDown, IconArrowUp, IconProps } from '@tabler/icons-react';
 import { floatToPercent } from '../../utils';
@@ -25,58 +26,56 @@ interface OctaveStatCardProps {
   titleProps?: TextProps;
   descriptionProps?: TextProps;
   valueProps?: TitleProps;
+  cardProps?: CardProps;
 }
 
 export function OctaveStatCard(props: OctaveStatCardProps) {
-  const { colorScheme } = useMantineColorScheme();
+  const colorMap = props.colorMap || {
+    up: 'green',
+    down: 'red',
+    neutral: 'primary',
+  };
   const { titleProps, descriptionProps, valueProps } = props;
   const Icon = props.icon;
   return (
-    <Card withBorder p="xl" bg={`${props.color || 'white'}.0`}>
+    <Card {...props.cardProps} p="xl" withBorder>
       <Stack>
         <Flex justify="space-between">
-          {Icon && (
-            <Icon
-              color={colorScheme === 'dark' ? props.color : 'black'}
-              size={50}
-            />
-          )}
+          <ThemeIcon size="xl">{Icon && <Icon size={25} />}</ThemeIcon>
 
           <Flex align="center" gap="xs">
-            {props.direction &&
-              props.direction !== 'neutral' &&
-              (props.direction === 'up' ? (
-                <IconArrowUp size={20} color={props.colorMap?.up || 'green'} />
-              ) : props.direction === 'down' ? (
-                <IconArrowDown
-                  size={20}
-                  color={props.colorMap?.down || 'red'}
-                />
-              ) : (
-                <IconArrowDown size={20} color="red" />
-              ))}
-            <Title
-              c={colorScheme === 'dark' ? props.color : 'black'}
-              {...valueProps}
-            >
+            {props.direction && props.direction !== 'neutral' && (
+              <ThemeIcon size="xs" color={colorMap?.[props.direction]}>
+                {props.direction === 'up' ? (
+                  <IconArrowUp size={12} />
+                ) : props.direction === 'down' ? (
+                  <IconArrowDown size={12} />
+                ) : (
+                  <IconArrowDown
+                    size={20}
+                    color={colorMap?.neutral || 'primary'}
+                  />
+                )}
+              </ThemeIcon>
+            )}
+
+            <Title {...valueProps}>
               {props.isValuePercent
                 ? `${floatToPercent(props.value)}`
                 : props.value}
             </Title>
           </Flex>
         </Flex>
-        <Stack gap="xs">
-          <Text
-            c={colorScheme === 'dark' ? props.color : 'black'}
-            fw={900}
-            {...titleProps}
-          >
+        <Stack gap={0} mt="xl">
+          <Text fw={900} {...titleProps} size="xl">
             {props.title}
           </Text>
           <Text
-            c={colorScheme === 'dark' ? 'black' : 'dimmed'}
             size="xs"
             {...descriptionProps}
+            c="dimmed"
+            truncate="end"
+            lineClamp={1}
           >
             {props.description}
           </Text>

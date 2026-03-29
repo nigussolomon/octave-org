@@ -18,7 +18,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@octave-org/ui": ["../../libs/ui"]
+      "@octave-org/ui": ["../../libs/ui/src/index.ts"]
     },
     "outDir": "dist",
     "rootDir": "src",

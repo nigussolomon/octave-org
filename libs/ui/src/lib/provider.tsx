@@ -13,7 +13,10 @@ export interface UIProviderProps extends PropsWithChildren {
 
 export function UIProvider({ children, theme, branding }: UIProviderProps) {
   return (
-    <MantineProvider defaultColorScheme="light" theme={theme ?? octaveTheme}>
+    <MantineProvider
+      defaultColorScheme="light"
+      theme={theme ?? { ...octaveTheme }}
+    >
       <OctaveBrandingProvider branding={branding}>
         <Notifications />
         {children}

@@ -37,16 +37,16 @@ const dmSans = DM_Sans({
 });
 
 const primary: MantineColorsTuple = [
-  '#ecefff',
-  '#d5dafb',
-  '#a9b1f1',
-  '#7a87e9',
-  '#5362e1',
-  '#3a4bdd',
-  '#2c40dc',
-  '#1f32c4',
-  '#182cb0',
-  '#0a259c',
+  '#fff0e4',
+  '#ffe0cf',
+  '#fac0a1',
+  '#f69e6e',
+  '#f28043',
+  '#f06e27',
+  '#f06418',
+  '#d6530c',
+  '#bf4906',
+  '#a73c00',
 ];
 
 export const octaveTheme = createTheme({
@@ -54,7 +54,7 @@ export const octaveTheme = createTheme({
     primary: primary,
   },
   primaryColor: 'primary',
-  defaultRadius: 'lg',
+  defaultRadius: 'md',
   fontFamily: 'DM Sans, sans-serif',
 });
 

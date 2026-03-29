@@ -19,7 +19,7 @@ interface OctaveStatCardProps {
   value: number;
   isValuePercent?: boolean;
   direction?: OctaveStatCardDirection;
-  color: string;
+  color?: string;
   icon: React.FC<IconProps>;
   colorMap?: Record<OctaveStatCardDirection, string>;
   titleProps?: TextProps;
@@ -32,7 +32,7 @@ export function OctaveStatCard(props: OctaveStatCardProps) {
   const { titleProps, descriptionProps, valueProps } = props;
   const Icon = props.icon;
   return (
-    <Card withBorder bg={`${props.color || 'white'}.0`}>
+    <Card withBorder p="xl" bg={`${props.color || 'white'}.0`}>
       <Stack>
         <Flex justify="space-between">
           {Icon && (

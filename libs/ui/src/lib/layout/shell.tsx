@@ -4,7 +4,6 @@ import {
   Avatar,
   Burger,
   Card,
-  Divider,
   Flex,
   Menu,
   ScrollArea,
@@ -66,11 +65,12 @@ export function OctaveShell({
   const [opened, { toggle }] = useDisclosure();
   const { setColorScheme, colorScheme } = useMantineColorScheme();
   const appBranding = useOctaveBranding(branding);
+  const { isMobile } = useBreakpoints();
+  const optimalHeight = `calc(100vh - 30px ${isMobile ? ' - 80px' : ''})`;
   const icon = {
     light: <IconSun size={18} />,
     dark: <IconMoon size={18} />,
   };
-  const { isMobile } = useBreakpoints();
 
   const links = menu.map((item: LinksGroupProps) => (
     <LinksGroup shellOpened={opened} {...item} key={item.label} />
@@ -168,6 +168,7 @@ export function OctaveShell({
       disabled={props.disabled}
       header={{ height: isMobile ? 80 : 0 }}
       padding={props.disablePadding ? 0 : 'md'}
+      bg="gray.0"
       navbar={{
         width: !opened ? 80 : 300,
         breakpoint: 'sm',
@@ -186,13 +187,13 @@ export function OctaveShell({
           {UserAcc()}
         </Flex>
       </AppShell.Header>
-      <AppShell.Navbar>
+      <AppShell.Navbar bg="primary" withBorder={false}>
         <ActionIcon
           display={!isMobile ? undefined : 'none'}
           onClick={toggle}
           radius={100}
           pos="absolute"
-          right={-15}
+          right={-16}
           top={28}
           style={{ zIndex: 10 }}
           variant="light"
@@ -231,16 +232,11 @@ export function OctaveShell({
             </Flex>
           </Stack>
         </AppShell.Section>
-        <Divider />
         <AppShell.Section grow>
-          <ScrollArea
-            type="never"
-            h={`calc(100vh - 160px ${isMobile ? ' - 80px' : ''})`}
-          >
+          <ScrollArea type="never" h={`calc(${optimalHeight} - 120px)`}>
             {links}
           </ScrollArea>
         </AppShell.Section>
-        <Divider />
         <AppShell.Section px="sm" h={80} w="100%">
           <Stack
             w="100%"
@@ -253,7 +249,19 @@ export function OctaveShell({
         </AppShell.Section>
       </AppShell.Navbar>
 
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main>
+        <ScrollArea
+          p="xs"
+          type="never"
+          style={{
+            borderWidth: 2,
+            borderColor: 'gray',
+          }}
+          h={optimalHeight}
+        >
+          {children}
+        </ScrollArea>
+      </AppShell.Main>
     </AppShell>
   );
 }

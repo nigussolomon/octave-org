@@ -54,7 +54,7 @@ export const octaveTheme = createTheme({
     primary: primary,
   },
   primaryColor: 'primary',
-  defaultRadius: 'md',
+  defaultRadius: 'lg',
   fontFamily: 'DM Sans, sans-serif',
 });
 

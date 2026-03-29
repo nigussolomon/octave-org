@@ -291,6 +291,22 @@ const Home: OctaveShellProps = () => {
           icon={IconBrandTabler}
           title="Example Stat"
           description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+          direction="up"
+          value={0.2}
+          isValuePercent
+        />
+        <OctaveStatCard
+          icon={IconBrandTabler}
+          title="Example Stat"
+          description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
+          direction="up"
+          value={0.2}
+          isValuePercent
+        />
+        <OctaveStatCard
+          icon={IconBrandTabler}
+          title="Example Stat"
+          description="This is an example stat description that will allow users to test and see how the stat card looks, and yes its long on purpose to make sure people can see its actual usecase"
           direction="down"
           value={0.2}
           isValuePercent

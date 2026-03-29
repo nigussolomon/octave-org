@@ -13,7 +13,6 @@ import {
   Text,
   TextProps,
   useMantineColorScheme,
-  useMantineTheme,
 } from '@mantine/core';
 import {
   IconEye,
@@ -95,7 +94,6 @@ function SortableHeader<T>({
   toggleHide: (key: string) => void;
   visibleColumns: OctaveCol<T>[];
 }) {
-  const theme = useMantineTheme();
   const { colorScheme } = useMantineColorScheme();
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: col.key as string });

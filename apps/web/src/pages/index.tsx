@@ -20,14 +20,12 @@ import {
   RadioGroup,
   Stack,
   success,
-  Title,
   warning,
 } from '@octave-org/ui';
 import {
   IconBrandTabler,
   IconCheck,
   IconClock,
-  IconMessageCircle2,
   IconProps,
   IconX,
 } from '@tabler/icons-react';
@@ -68,6 +66,11 @@ const columns: OctaveCol<{
   {
     key: 'status',
     label: 'Status',
+    labelProps: { c: 'gray.9' },
+  },
+  {
+    key: 'actions',
+    label: 'Actions',
     labelProps: { c: 'gray.9' },
   },
 ];

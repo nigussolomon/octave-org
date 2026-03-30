@@ -19,6 +19,7 @@ import {
   IconNotes,
   IconPresentationAnalytics,
 } from '@tabler/icons-react';
+import { OctaveLinksGroupProps } from '@octave-org/ui';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -72,17 +73,17 @@ type ShellLayoutProps = AppProps & {
   Component: OctaveShellProps;
 };
 
-const mockdata = [
+const mockdata: OctaveLinksGroupProps[] = [
   { label: 'Dashboard', icon: IconGauge },
   {
     label: 'Market news',
     icon: IconNotes,
     initiallyOpened: true,
     links: [
-      { label: 'Overview', link: '/' },
+      { label: 'Overview', link: '/', active: true },
       { label: 'Forecasts', link: '/' },
       { label: 'Outlook', link: '/' },
-      { label: 'Real time', link: '/' },
+      { label: 'Real time', link: '/', hidden: true },
     ],
   },
   {

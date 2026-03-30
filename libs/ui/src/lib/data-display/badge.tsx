@@ -1,4 +1,4 @@
-import { Badge, BadgeProps, Box, Card, Text, TextProps } from '@mantine/core';
+import { Badge, BadgeProps, Card, Flex, Text, TextProps } from '@mantine/core';
 import { IconInfoCircle, IconProps } from '@tabler/icons-react';
 
 interface OctaveBadgeProps extends BadgeProps {
@@ -9,7 +9,7 @@ interface OctaveBadgeProps extends BadgeProps {
 export function OctaveBadge(props: OctaveBadgeProps) {
   const { label, labelProps, ...badgeProps } = props;
   return (
-    <Box>
+    <Flex>
       <Card
         withBorder
         style={{
@@ -25,7 +25,7 @@ export function OctaveBadge(props: OctaveBadgeProps) {
           </Text>
         </Badge>
       </Card>
-    </Box>
+    </Flex>
   );
 }
 

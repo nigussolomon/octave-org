@@ -41,11 +41,11 @@ import { CSS } from '@dnd-kit/utilities';
 import { useBreakpoints } from '../../utils';
 
 export interface OctaveCol<T> {
-  key: keyof T;
+  key: keyof T | 'actions';
   label: string;
   labelProps?: TextProps;
   visible?: boolean;
-  render?: (value: T[keyof T], row: T) => React.ReactNode;
+  render?: (value: unknown, row: T) => React.ReactNode;
   headerActions?: React.ReactNode;
   tableDropdown?: React.ReactNode;
 }
@@ -102,7 +102,7 @@ function SortableHeader<T>({
     transform: transform
       ? CSS.Transform.toString({
           x: transform.x,
-          y: transform.y,
+          y: 0,
           scaleX: 1,
           scaleY: 1,
         })
@@ -221,8 +221,13 @@ export function OctaveTable<T>({
                   <Table.Th w={160}>{col.label}</Table.Th>
                   <Table.Td key={col.key as string}>
                     {col.render
-                      ? col.render(d[col.key], d)
-                      : (d[col.key] as React.ReactNode)}
+                      ? col.render(
+                          (d as Record<string, unknown>)[col.key as string],
+                          d,
+                        )
+                      : ((d as Record<string, unknown>)[
+                          col.key as string
+                        ] as React.ReactNode)}
                   </Table.Td>
                 </Table.Tr>
               ))}
@@ -310,8 +315,15 @@ export function OctaveTable<T>({
                     {visibleColumns.map((col) => (
                       <Table.Td key={col.key as string}>
                         {col.render
-                          ? col.render(row[col.key], row)
-                          : (row[col.key] as React.ReactNode)}
+                          ? col.render(
+                              (row as Record<string, unknown>)[
+                                col.key as string
+                              ],
+                              row,
+                            )
+                          : ((row as Record<string, unknown>)[
+                              col.key as string
+                            ] as React.ReactNode)}
                       </Table.Td>
                     ))}
                   </Table.Tr>

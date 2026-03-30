@@ -41,11 +41,15 @@ export function OctaveStatCard(props: OctaveStatCardProps) {
     <Card {...props.cardProps} p="xl" withBorder>
       <Stack>
         <Flex justify="space-between">
-          <ThemeIcon size="xl">{Icon && <Icon size={25} />}</ThemeIcon>
+          {Icon && <Icon stroke={1.3} size={35} />}
 
           <Flex align="center" gap="xs">
             {props.direction && props.direction !== 'neutral' && (
-              <ThemeIcon size="xs" color={colorMap?.[props.direction]}>
+              <ThemeIcon
+                variant="light"
+                size="xs"
+                color={colorMap?.[props.direction]}
+              >
                 {props.direction === 'up' ? (
                   <IconArrowUp size={12} />
                 ) : props.direction === 'down' ? (
@@ -67,16 +71,10 @@ export function OctaveStatCard(props: OctaveStatCardProps) {
           </Flex>
         </Flex>
         <Stack gap={0} mt="xl">
-          <Text fw={900} {...titleProps} size="xl">
+          <Text fw={900} {...titleProps} size="md">
             {props.title}
           </Text>
-          <Text
-            size="xs"
-            {...descriptionProps}
-            c="dimmed"
-            truncate="end"
-            lineClamp={1}
-          >
+          <Text {...descriptionProps} c="dimmed" size="xs">
             {props.description}
           </Text>
         </Stack>

@@ -22,7 +22,7 @@ import {
   IconSun,
 } from '@tabler/icons-react';
 import { NextPage } from 'next/dist/types';
-import { LinksGroup, LinksGroupProps } from './nav-links';
+import { OctaveLinksGroup, OctaveLinksGroupProps } from './nav-links';
 import { useBreakpoints } from '../../utils';
 import { ThemeTrigger } from '../theme';
 import { OctaveBranding, useOctaveBranding } from '../branding';
@@ -54,7 +54,7 @@ export function OctaveShell({
   props: OctaveShellProps;
   title?: string;
   subTitle?: string;
-  menu: LinksGroupProps[];
+  menu: OctaveLinksGroupProps[];
   branding?: OctaveBranding;
   user?: {
     fullName: string;
@@ -73,8 +73,8 @@ export function OctaveShell({
     dark: <IconMoon size={18} />,
   };
 
-  const links = menu.map((item: LinksGroupProps) => (
-    <LinksGroup shellOpened={opened} {...item} key={item.label} />
+  const links = menu.map((item: OctaveLinksGroupProps) => (
+    <OctaveLinksGroup shellOpened={opened} {...item} key={item.label} />
   ));
 
   const NavLogo = () => (
@@ -189,11 +189,7 @@ export function OctaveShell({
           {UserAcc()}
         </Flex>
       </AppShell.Header>
-      <AppShell.Navbar
-        bg={colorScheme === 'dark' ? 'dark' : 'gray.0'}
-        p="xs"
-        withBorder={false}
-      >
+      <AppShell.Navbar p="xs" pt={0} withBorder={false}>
         <ActionIcon
           display={!isMobile ? undefined : 'none'}
           onClick={toggle}
@@ -201,7 +197,7 @@ export function OctaveShell({
           radius={100}
           pos="absolute"
           right={-10}
-          top={44}
+          top={34}
           style={{ zIndex: 10 }}
           variant="light"
         >
@@ -258,8 +254,25 @@ export function OctaveShell({
           </Stack>
         </AppShell.Section>
       </AppShell.Navbar>
-      <AppShell.Main>
-        <ScrollArea type="never" h="96vh">
+      <AppShell.Main
+        bg={
+          props.disabled
+            ? undefined
+            : colorScheme === 'dark'
+              ? 'dark'
+              : 'gray.1'
+        }
+      >
+        <ScrollArea
+          type="never"
+          h={
+            isMobile
+              ? `calc(${optimalHeight} - 120px)`
+              : props.disablePadding || props.disabled
+                ? '100vh'
+                : '96vh'
+          }
+        >
           {children}
         </ScrollArea>
       </AppShell.Main>

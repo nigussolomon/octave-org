@@ -14,11 +14,13 @@ Sets up Mantine's `MantineProvider` with the default Octave theme, registers the
 |---|---|---|---|---|
 | `children` | `React.ReactNode` | ✅ | – | Your application's component tree. |
 | `theme` | `MantineThemeOverride` | ❌ | `octaveTheme` | A custom Mantine theme override. When omitted, `octaveTheme` is used. |
+| `branding` | `OctaveBranding` | ❌ | `undefined` | Global branding defaults (`companyName`, `slogan`, `logo`) made available via context to `OctaveShell`, `OctaveAuthWrapper`, and `OctaveAuthForm`. |
 
 ### What it does
 
 - Renders `<MantineProvider defaultColorScheme="light">` with the resolved theme.
 - Mounts `<Notifications />` so notification helpers (`success`, `info`, `warning`, `error`) work anywhere in the tree.
+- Provides an `OctaveBrandingProvider` context used by shell and auth components to resolve logo, company name, and slogan.
 - Imports `@mantine/core/styles.css` and `@mantine/notifications/styles.css`.
 
 ### Example
@@ -55,10 +57,18 @@ export function OctaveProvider(props: OctaveProviderProps): JSX.Element;
 // _app.tsx (Next.js Pages Router)
 import type { AppProps } from 'next/app';
 import { OctaveProvider } from '@octave-org/ui';
+import { IconGalaxy } from '@tabler/icons-react';
+import { ThemeIcon } from '@mantine/core';
+
+const branding = {
+  companyName: 'Octave Labs',
+  slogan: 'Secure access for modern teams',
+  logo: <ThemeIcon variant="default" size={50}><IconGalaxy /></ThemeIcon>,
+};
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <OctaveProvider>
+    <OctaveProvider branding={branding}>
       <Component {...pageProps} />
     </OctaveProvider>
   );

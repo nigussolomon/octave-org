@@ -1,5 +1,5 @@
 import {
-  ActionIcon,
+  Divider,
   error,
   Flex,
   info,
@@ -80,6 +80,7 @@ const Home: OctaveShellProps = () => {
 
   return (
     <Stack>
+      <Divider label="Button Components" />
       <Flex wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
         <OctaveButton
           btnProps={{
@@ -133,6 +134,7 @@ const Home: OctaveShellProps = () => {
           labelProps={{ case: 'uppercase', fw: 900 }}
         />
       </Flex>
+      <Divider label="Input Components" />
       <Flex wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
         <OctaveTextInput
           label="Text Input"
@@ -176,6 +178,9 @@ const Home: OctaveShellProps = () => {
             />
           </Stack>
         </RadioGroup>
+      </Flex>
+      <Divider label="Badge Components" />
+      <Flex gap="xs">
         <Flex wrap="wrap" gap="xs">
           <OctaveBadge color="blue" variant="dot" label="Hello World" />
           <OctaveBadge color="green" variant="dot" label="Hello World" />
@@ -205,7 +210,7 @@ const Home: OctaveShellProps = () => {
           />
         </Flex>
       </Flex>
-
+      <Divider label="Stat Card Components" />
       <Flex wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
         <OctaveStatCard
           icon={IconBrandTabler}
@@ -260,6 +265,7 @@ const Home: OctaveShellProps = () => {
         isValuePercent
         color="blue"
       />
+      <Divider label="Table Components" />
       <OctaveTable
         loading
         data={[

@@ -4,25 +4,37 @@
 set -e
 
 PACKAGE_PATH="libs/ui/package.json"
-DIST_PATH="dist/libs/ui"
+DIST_PATH="libs/ui"
+SKIP_VERSION_INCREMENT=false
+
+# Check for arguments
+for arg in "$@"; do
+  if [ "$arg" == "--novp" ]; then
+    SKIP_VERSION_INCREMENT=true
+  fi
+done
 
 echo "🚀 Starting publish process for @octave-org/ui..."
 
 # 1. Increment version in libs/ui/package.json (patch version)
-echo "📝 Incrementing version..."
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # macOS sed
-  sed -i '' -E 's/"version": "([0-9]+)\.([0-9]+)\.([0-9]+)"/"version": "\1.\2.'$(($(sed -nE 's/.*"version": "[0-9]+\.[0-9]+\.([0-9]+)".*/\1/p' $PACKAGE_PATH) + 1))'"/' $PACKAGE_PATH
+if [ "$SKIP_VERSION_INCREMENT" = true ]; then
+  echo "⏩ Skipping version increment (--novp)..."
+  NEW_VERSION=$(grep '"version":' $PACKAGE_PATH | cut -d'"' -f4)
 else
-  # Linux sed
-  CURRENT_VERSION=$(grep '"version":' $PACKAGE_PATH | cut -d'"' -f4)
-  IFS='.' read -r major minor patch <<< "$CURRENT_VERSION"
-  NEW_VERSION="$major.$minor.$((patch + 1))"
-  sed -i "s/\"version\": \"$CURRENT_VERSION\"/\"version\": \"$NEW_VERSION\"/" $PACKAGE_PATH
+  echo "📝 Incrementing version..."
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS sed
+    sed -i '' -E 's/"version": "([0-9]+)\.([0-9]+)\.([0-9]+)"/"version": "\1.\2.'$(($(sed -nE 's/.*"version": "[0-9]+\.[0-9]+\.([0-9]+)".*/\1/p' $PACKAGE_PATH) + 1))'"/' $PACKAGE_PATH
+  else
+    # Linux sed
+    CURRENT_VERSION=$(grep '"version":' $PACKAGE_PATH | cut -d'"' -f4)
+    IFS='.' read -r major minor patch <<< "$CURRENT_VERSION"
+    NEW_VERSION="$major.$minor.$((patch + 1))"
+    sed -i "s/\"version\": \"$CURRENT_VERSION\"/\"version\": \"$NEW_VERSION\"/" $PACKAGE_PATH
+  fi
+  NEW_VERSION=$(grep '"version":' $PACKAGE_PATH | cut -d'"' -f4)
+  echo "✅ Version incremented to $NEW_VERSION"
 fi
-
-NEW_VERSION=$(grep '"version":' $PACKAGE_PATH | cut -d'"' -f4)
-echo "✅ Version incremented to $NEW_VERSION"
 
 # 2. Build the UI library
 echo "🏗️ Building UI library with bun nx..."

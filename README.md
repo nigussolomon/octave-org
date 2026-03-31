@@ -1,6 +1,8 @@
 # OctaveOrg
 
-This repository is focused on the **`@octave-org/ui`** package, which contains our core UI component library. 
+[![CI](https://github.com/nigussolomon/octave-org/actions/workflows/ci.yml/badge.svg)](https://github.com/nigussolomon/octave-org/actions/workflows/ci.yml) [![Package Audit](https://github.com/nigussolomon/octave-org/actions/workflows/audit.yml/badge.svg)](https://github.com/nigussolomon/octave-org/actions/workflows/audit.yml)
+
+This repository is focused on the **`@octave-org/ui`** package, which contains our core UI component library.
 
 ## Project Structure
 
@@ -31,7 +33,8 @@ To create a distributable tarball of the UI package:
 cd libs/ui
 bun pm pack
 ```
-*(Note: Pushes to the `main` branch can also trigger a manual UI build workflow via GitHub Actions that publishes this tarball as an artifact).*
+
+_(Note: Pushes to the `main` branch can also trigger a manual UI build workflow via GitHub Actions that publishes this tarball as an artifact)._
 
 ### Running the Test Web App
 

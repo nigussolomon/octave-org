@@ -1,12 +1,16 @@
 name: Release UI Package
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'libs/ui/package.json'
   workflow_dispatch:
     inputs:
       version:
         description: 'Release version/tag (e.g., v0.0.1)'
-        required: true
-        default: 'v0.0.1'
+        required: false
 
 permissions:
   contents: write
@@ -24,22 +28,45 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Get version from package.json
+        id: package_version
+        run: |
+          VERSION=$(grep '"version":' libs/ui/package.json | cut -d'"' -f4)
+          echo "version=v$VERSION" >> $GITHUB_OUTPUT
+          echo "Current version is v$VERSION"
+
+      - name: Check if tag already exists
+        id: check_tag
+        run: |
+          TAG=${{ steps.package_version.outputs.version }}
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Tag $TAG already exists, skipping release."
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "Tag $TAG does not exist, proceeding with release."
+          fi
+
       - name: Install dependencies
+        if: steps.check_tag.outputs.exists == 'false' || github.event_name == 'workflow_dispatch'
         run: bun install --no-cache
 
       - name: Build UI library
+        if: steps.check_tag.outputs.exists == 'false' || github.event_name == 'workflow_dispatch'
         run: bun nx build ui
 
       - name: Pack UI library
+        if: steps.check_tag.outputs.exists == 'false' || github.event_name == 'workflow_dispatch'
         run: |
           cd libs/ui
           bun pm pack || npm pack
 
       - name: Create GitHub Release
+        if: steps.check_tag.outputs.exists == 'false' || github.event_name == 'workflow_dispatch'
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ github.event.inputs.version }}
-          name: UI Package ${{ github.event.inputs.version }}
+          tag: ${{ github.event.inputs.version || steps.package_version.outputs.version }}
+          name: UI Package ${{ github.event.inputs.version || steps.package_version.outputs.version }}
           artifacts: libs/ui/*.tgz
           allowUpdates: true
           replacesArtifacts: true

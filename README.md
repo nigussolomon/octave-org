@@ -1,6 +1,6 @@
 # OctaveOrg
 
-[![CI](https://github.com/nigussolomon/octave-org/actions/workflows/ci.yml/badge.svg)](https://github.com/nigussolomon/octave-org/actions/workflows/ci.yml) [![Package Audit](https://github.com/nigussolomon/octave-org/actions/workflows/audit.yml/badge.svg)](https://github.com/nigussolomon/octave-org/actions/workflows/audit.yml)
+[![CI](https://github.com/nigussolomon/octave-org/actions/workflows/ci.yml/badge.svg)](https://github.com/nigussolomon/octave-org/actions/workflows/ci.yml) [![Package Audit](https://github.com/nigussolomon/octave-org/actions/workflows/audit.yml/badge.svg)](https://github.com/nigussolomon/octave-org/actions/workflows/audit.yml) [![Release UI Package](https://github.com/nigussolomon/octave-org/actions/workflows/publish-ui.yml/badge.svg)](https://github.com/nigussolomon/octave-org/actions/workflows/publish-ui.yml)
 
 This repository is focused on the **`@octave-org/ui`** package, which contains our core UI component library.
 

@@ -26,6 +26,7 @@ import { OctaveLinksGroup, OctaveLinksGroupProps } from './nav-links';
 import { useBreakpoints } from '../../utils';
 import { ThemeTrigger } from '../theme';
 import { OctaveBranding, useOctaveBranding } from '../branding';
+import { useEffect, useState } from 'react';
 
 export type OctaveShellProps = {
   disablePadding?: boolean;
@@ -62,12 +63,19 @@ export function OctaveShell({
     logout: () => void;
   };
 }) {
+  const [mounted, setMounted] = useState(false);
   const [opened, { toggle }] = useDisclosure(true);
   const theme = useMantineTheme();
   const { setColorScheme, colorScheme } = useMantineColorScheme();
   const appBranding = useOctaveBranding(branding);
   const { isMobile } = useBreakpoints();
   const optimalHeight = `calc(100vh - 60px)`;
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timeout);
+  }, []);
+
   const icon = {
     light: <IconSun size={18} />,
     dark: <IconMoon size={18} />,
@@ -127,7 +135,13 @@ export function OctaveShell({
               onClick={() =>
                 setColorScheme(colorScheme === 'light' ? 'dark' : 'light')
               }
-              rightSection={icon[colorScheme as 'light' | 'dark']}
+              rightSection={
+                mounted ? (
+                  icon[colorScheme as 'light' | 'dark']
+                ) : (
+                  <IconSun size={15} />
+                )
+              }
             >
               <Text size="xs">Toggle Theme</Text>
             </Menu.Item>
@@ -258,7 +272,7 @@ export function OctaveShell({
         bg={
           props.disabled
             ? undefined
-            : colorScheme === 'dark'
+            : mounted && colorScheme === 'dark'
               ? 'dark'
               : 'gray.1'
         }

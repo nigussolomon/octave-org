@@ -5,7 +5,6 @@ import {
   Flex,
   Overlay,
   SimpleGrid,
-  useMantineColorScheme,
 } from '@mantine/core';
 import { OctaveStackedText } from '../../text';
 import { OctaveBranding, useOctaveBranding } from '../../branding';
@@ -17,7 +16,6 @@ export interface OctaveAuthWrapperProps {
 }
 
 export function OctaveAuthWrapper(props: OctaveAuthWrapperProps) {
-  const { colorScheme } = useMantineColorScheme();
   const branding = useOctaveBranding(props.branding);
 
   return (
@@ -42,10 +40,10 @@ export function OctaveAuthWrapper(props: OctaveAuthWrapperProps) {
               title={branding.companyName}
               description={branding.slogan}
               titleProps={{
-                c: colorScheme === 'light' ? 'white' : 'black',
+                c: 'light-dark(var(--mantine-color-white), var(--mantine-color-black))',
               }}
               descProps={{
-                c: colorScheme === 'light' ? 'white' : 'black',
+                c: 'light-dark(var(--mantine-color-white), var(--mantine-color-black))',
               }}
             />
           </Flex>

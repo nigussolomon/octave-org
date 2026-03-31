@@ -12,7 +12,6 @@ import {
   Table,
   Text,
   TextProps,
-  useMantineColorScheme,
 } from '@mantine/core';
 import {
   IconEye,
@@ -94,7 +93,6 @@ function SortableHeader<T>({
   toggleHide: (key: string) => void;
   visibleColumns: OctaveCol<T>[];
 }) {
-  const { colorScheme } = useMantineColorScheme();
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: col.key as string });
 
@@ -115,7 +113,7 @@ function SortableHeader<T>({
       py="sm"
       ref={setNodeRef}
       {...attributes}
-      bg={colorScheme === 'dark' ? 'dark' : 'white'}
+      bg="light-dark(var(--mantine-color-white), var(--mantine-color-dark-filled))"
       style={{
         ...style,
       }}
@@ -134,7 +132,7 @@ function SortableHeader<T>({
             fw={500}
             size="sm"
             {...col.labelProps}
-            c={colorScheme === 'dark' ? 'white' : 'black'}
+            c="light-dark(var(--mantine-color-black), var(--mantine-color-white))"
           >
             {col.label}
           </Text>
@@ -206,8 +204,8 @@ export function OctaveTable<T>({
     if (data?.length === 0) {
       return <EmptyTable />;
     }
-    return data?.map((d: T) => (
-      <Stack>
+    return data?.map((d: T, idx) => (
+      <Stack key={idKey ? String(d[idKey]) : String(idx)}>
         <Card p={0} withBorder>
           <Table
             variant="vertical"
@@ -263,6 +261,7 @@ export function OctaveTable<T>({
 
       <Card p={0} withBorder>
         <DndContext
+          id="stable-dnd-context"
           sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={(event) => {

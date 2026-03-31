@@ -8,7 +8,6 @@ import {
   ThemeIcon,
   Tooltip,
   UnstyledButton,
-  useMantineColorScheme,
   useMantineTheme,
 } from '@mantine/core';
 import Link from 'next/link';
@@ -33,12 +32,10 @@ export function OctaveLinksGroup({
   shellOpened,
 }: OctaveLinksGroupProps) {
   const theme = useMantineTheme();
-  const { colorScheme } = useMantineColorScheme();
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
   const [controlHovered, setControlHovered] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
-  const isDark = colorScheme === 'dark';
   const isActiveTree =
     active || links?.find((link) => link.active) !== undefined;
 
@@ -63,16 +60,12 @@ export function OctaveLinksGroup({
         borderLeft: `${link.active ? '2px' : '1px'} solid ${
           link.active
             ? theme.colors.primary[6]
-            : isDark
-              ? theme.colors.dark[4]
-              : theme.colors.gray[3]
+            : 'light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))'
         }`,
         color: link.active ? theme.colors.primary[6] : undefined,
         backgroundColor:
           hoveredLink === link.label
-            ? isDark
-              ? theme.colors.dark[6]
-              : theme.colors.gray[1]
+            ? 'light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6))'
             : 'transparent',
       }}
     >
@@ -108,11 +101,10 @@ export function OctaveLinksGroup({
         borderRadius: theme.spacing.xs,
         padding: `${theme.spacing.xs}`,
         fontSize: theme.fontSizes.sm,
-        color: isDark ? 'white' : 'black',
+        color:
+          'light-dark(var(--mantine-color-black), var(--mantine-color-white))',
         backgroundColor: controlHovered
-          ? isDark
-            ? theme.colors.dark[6]
-            : theme.colors.primary[0]
+          ? `light-dark(${theme.colors.primary[0]}, var(--mantine-color-dark-6))`
           : 'transparent',
       }}
     >
@@ -159,12 +151,11 @@ export function OctaveLinksGroup({
           position="right"
           offset={15}
           withArrow
-          bg={isDark ? 'dark.6' : 'white'}
-          c={isDark ? 'white' : 'black'}
+          bg="light-dark(var(--mantine-color-white), var(--mantine-color-dark-6))"
+          c="light-dark(var(--mantine-color-black), var(--mantine-color-white))"
           style={{
-            border: `1px solid ${
-              isDark ? theme.colors.dark[4] : theme.colors.gray[3]
-            }`,
+            border:
+              '1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))',
             fontSize: theme.fontSizes.xs,
             fontWeight: 500,
           }}

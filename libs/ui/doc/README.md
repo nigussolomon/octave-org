@@ -24,17 +24,17 @@ export default function App({ children }) {
 
 ## Component Categories
 
-| Category | Description | Documentation |
-|---|---|---|
-| **Data Display** | Badges, banners, stat cards, and data tables | [data-display.md](./data-display.md) |
-| **Feedback** | Toast notifications (success, info, warning, error) | [feedback.md](./feedback.md) |
-| **Input Components** | Form inputs, buttons, and the form builder | [input-components.md](./input-components.md) |
-| **Layout** | App shell with sidebar navigation | [layout.md](./layout.md) |
-| **Text** | Stacked text and linked text helpers | [text.md](./text.md) |
-| **Theme** | Theme configuration and color-scheme toggle | [theme.md](./theme.md) |
-| **Blocks** | Pre-built auth wrapper and auth form | [blocks.md](./blocks.md) |
-| **Utilities** | Formatters, cookie helpers, responsive breakpoints | [utilities.md](./utilities.md) |
-| **Provider** | Root provider wrapping Mantine and notifications | [provider.md](./provider.md) |
+| Category             | Description                                         | Documentation                                |
+| -------------------- | --------------------------------------------------- | -------------------------------------------- |
+| **Data Display**     | Badges, stat cards, and data tables                 | [data-display.md](./data-display.md)         |
+| **Feedback**         | Toast notifications (success, info, warning, error) | [feedback.md](./feedback.md)                 |
+| **Input Components** | Form inputs, buttons, and the form builder          | [input-components.md](./input-components.md) |
+| **Layout**           | App shell with sidebar navigation                   | [layout.md](./layout.md)                     |
+| **Text**             | Stacked text and linked text helpers                | [text.md](./text.md)                         |
+| **Theme**            | Theme configuration and color-scheme toggle         | [theme.md](./theme.md)                       |
+| **Blocks**           | Pre-built auth wrapper and auth form                | [blocks.md](./blocks.md)                     |
+| **Utilities**        | Formatters, cookie helpers, responsive breakpoints  | [utilities.md](./utilities.md)               |
+| **Provider**         | Root provider wrapping Mantine and notifications    | [provider.md](./provider.md)                 |
 
 ---
 

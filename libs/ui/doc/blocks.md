@@ -14,6 +14,7 @@ A two-column page layout for authentication screens. The left column shows a dec
 |---|---|---|---|---|
 | `children` | `React.ReactNode` | ✅ | – | Your form or content to display in the non-decorative column. |
 | `flip` | `boolean` | ❌ | `false` | When `true`, moves `children` to the left and the decorative panel to the right. |
+| `branding` | `OctaveBranding` | ❌ | `undefined` | Overrides the branding (`companyName`, `slogan`, `logo`) shown in the decorative panel. Falls back to the `OctaveProvider` branding context. |
 
 ### Layout behaviour
 
@@ -51,6 +52,7 @@ A batteries-included authentication form component that combines `OctaveAuthWrap
 | `title` | `string` | ✅ | – | Heading text above the form. |
 | `description` | `string` | ✅ | – | Subheading / helper text below the title. |
 | `icon` | `React.ReactNode` | ❌ | `undefined` | Optional icon rendered above the title. |
+| `branding` | `OctaveBranding` | ❌ | `undefined` | Overrides the branding shown in the `OctaveAuthWrapper` decorative panel. Falls back to the `OctaveProvider` branding context. |
 | `fields` | `FormFieldConfig<T>[]` | ❌ | `undefined` | Flat list of fields rendered in a single column. Use `rows` for multi-column layouts. |
 | `rows` | `AuthFormRow<T>[]` | ❌ | `undefined` | Row-based layout. Each row contains one or more columns of fields. Rows with `> 1` column render side-by-side via `Flex`. |
 | `pinFieldName` | `keyof T` | ❌ | `undefined` | When set, renders a `PinInput` bound to this form field. |

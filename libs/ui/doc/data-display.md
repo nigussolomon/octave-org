@@ -81,45 +81,6 @@ const iconMap = {
 
 ---
 
-## OctaveBanner
-
-An informational banner that combines an icon, a divider, stacked title/description text, and an optional actions slot — all laid out horizontally inside a card.
-
-### Props
-
-| Prop | Type | Required | Default | Description |
-|---|---|---|---|---|
-| `icon` | `React.FC<IconProps>` | ✅ | – | Tabler icon component rendered on the left. |
-| `stackedTextProps` | `OctaveStackedTextProps` | ✅ | – | Props forwarded to `OctaveStackedText` (`title` and `description` are required). |
-| `cardProps` | `CardProps` | ❌ | `undefined` | Mantine `Card` props for the outer container. Use `bg` to tint the card and icon color simultaneously. |
-| `dividerProps` | `DividerProps` | ❌ | `undefined` | Props for the vertical divider between the icon and text. |
-| `flexProps` | `FlexProps` | ❌ | `undefined` | Props for the inner `Flex` that wraps icon, divider, and text. |
-| `iconProps` | `IconProps` | ❌ | `undefined` | Extra Tabler icon props (e.g. `size`, `stroke`). |
-| `actions` | `React.ReactNode` | ❌ | `undefined` | Content rendered on the right side of the banner (e.g. a button). |
-
-### Example
-
-```tsx
-import { OctaveBanner, OctaveButton } from '@octave-org/ui';
-import { IconInfoCircle } from '@tabler/icons-react';
-
-<OctaveBanner
-  icon={IconInfoCircle}
-  cardProps={{ bg: 'blue.0', withBorder: true }}
-  stackedTextProps={{
-    title: 'Heads up!',
-    description: 'Your subscription expires in 3 days.',
-  }}
-  actions={
-    <OctaveButton
-      btnProps={{ label: 'Renew', context: 'primary', action: () => {} }}
-    />
-  }
-/>
-```
-
----
-
 ## OctaveStatCard
 
 A KPI / metric card displaying a value, title, description, directional indicator (up / down), and a large icon.
@@ -131,7 +92,7 @@ A KPI / metric card displaying a value, title, description, directional indicato
 | `title` | `string` | ✅ | – | Short metric name displayed below the value. |
 | `description` | `string` | ✅ | – | Supplementary description text. |
 | `value` | `number` | ✅ | – | Numeric value to display. |
-| `color` | `string` | ✅ | – | Mantine color key used for the card background (`color.0`) and text colors. |
+| `color` | `string` | ❌ | `undefined` | Mantine color key used for the card background (`color.0`) and text colors. |
 | `icon` | `React.FC<IconProps>` | ✅ | – | Large Tabler icon shown in the top-left. |
 | `isValuePercent` | `boolean` | ❌ | `false` | When `true`, formats the value as a percentage using `floatToPercent`. |
 | `direction` | `'up' \| 'down' \| 'neutral'` | ❌ | `undefined` | Shows an arrow indicator. `'neutral'` hides the arrow. |
@@ -180,7 +141,7 @@ Configuration object that describes a single column.
 
 | Field | Type | Required | Default | Description |
 |---|---|---|---|---|
-| `key` | `keyof T` | ✅ | – | The property key from the row data object to display. |
+| `key` | `keyof T \| 'actions'` | ✅ | – | The property key from the row data object to display. Use `'actions'` for a column that renders row-level action controls. |
 | `label` | `string` | ✅ | – | Column header text. |
 | `labelProps` | `TextProps` | ❌ | `undefined` | Extra `Text` props for the header label. |
 | `visible` | `boolean` | ❌ | `true` | Set to `false` to hide the column initially. |

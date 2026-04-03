@@ -20,6 +20,11 @@ import {
   IconPresentationAnalytics,
 } from '@tabler/icons-react';
 import { OctaveLinksGroupProps } from '@octave-org/ui';
+import { initSdk, getConfig } from '@octave-org/ui';
+
+initSdk({ url: process.env.NEXT_PUBLIC_API_URL });
+
+console.log(getConfig().url);
 
 const dmSans = DM_Sans({
   subsets: ['latin'],

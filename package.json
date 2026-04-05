@@ -9,6 +9,8 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
+    "@mantine/charts": "^9.0.0",
+    "recharts": "^3.8.1",
     "@reduxjs/toolkit": "^2.11.2",
     "react-redux": "^9.2.0",
     "@dnd-kit/core": "^6.3.1",

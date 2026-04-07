@@ -312,7 +312,7 @@ export function OctaveTable<T>({
                 data.map((row, idx) => (
                   <Table.Tr key={idKey ? String(row[idKey]) : String(idx)}>
                     {visibleColumns.map((col) => (
-                      <Table.Td key={col.key as string}>
+                      <Table.Td px="xl" key={col.key as string}>
                         {col.render
                           ? col.render(
                               (row as Record<string, unknown>)[

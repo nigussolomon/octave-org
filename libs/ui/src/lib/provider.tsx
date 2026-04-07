@@ -3,6 +3,7 @@ import { Notifications } from '@mantine/notifications';
 import type { PropsWithChildren } from 'react';
 import { octaveTheme } from './theme/theme';
 import { OctaveBranding, OctaveBrandingProvider } from './branding';
+import { ModalsProvider } from '@mantine/modals';
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import '@mantine/charts/styles.css';
@@ -20,7 +21,7 @@ export function UIProvider({ children, theme, branding }: UIProviderProps) {
     >
       <OctaveBrandingProvider branding={branding}>
         <Notifications />
-        {children}
+        <ModalsProvider>{children}</ModalsProvider>
       </OctaveBrandingProvider>
     </MantineProvider>
   );

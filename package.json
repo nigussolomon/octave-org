@@ -7,9 +7,12 @@
     "publish:ui": "./scripts/publish.sh"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@mantine/dropzone": "^9.0.0"
+  },
   "devDependencies": {
     "@mantine/charts": "^9.0.0",
+    "@mantine/modals": "^9.0.0",
     "recharts": "^3.8.1",
     "@reduxjs/toolkit": "^2.11.2",
     "react-redux": "^9.2.0",

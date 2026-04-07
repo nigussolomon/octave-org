@@ -3,6 +3,8 @@ export * from '@mantine/form';
 export * from '@mantine/hooks';
 export * from '@mantine/notifications';
 export * from '@mantine/charts';
+export * from '@mantine/dropzone';
+export * from '@mantine/modals';
 
 export * from './components';
 export * from './utils';

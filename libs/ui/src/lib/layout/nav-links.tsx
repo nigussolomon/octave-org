@@ -165,7 +165,9 @@ export function OctaveLinksGroup({
       ) : (
         control
       )}
-      {hasLinks && shellOpened && <Collapse in={opened}>{items}</Collapse>}
+      {hasLinks && shellOpened && (
+        <Collapse expanded={opened}>{items}</Collapse>
+      )}
     </>
   );
 }

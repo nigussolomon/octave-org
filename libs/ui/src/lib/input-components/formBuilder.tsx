@@ -7,6 +7,7 @@ import {
   OctaveCheckboxInput,
   OctaveRadioInput,
   OctaveSecureInputProps,
+  OctaveDateInput,
 } from './inputs';
 import {
   TextInputProps,
@@ -15,8 +16,16 @@ import {
   CheckboxProps,
   RadioProps,
 } from '@mantine/core';
+import { DatePickerInputProps } from '@mantine/dates';
 
-type FieldType = 'text' | 'number' | 'select' | 'secure' | 'checkbox' | 'radio';
+type FieldType =
+  | 'text'
+  | 'number'
+  | 'select'
+  | 'secure'
+  | 'checkbox'
+  | 'radio'
+  | 'date';
 
 export interface FieldConfigMap {
   text: TextInputProps;
@@ -25,6 +34,7 @@ export interface FieldConfigMap {
   secure: OctaveSecureInputProps;
   checkbox: CheckboxProps;
   radio: RadioProps;
+  date: DatePickerInputProps;
 }
 
 export type FormFieldConfig<T> = {
@@ -94,6 +104,13 @@ export function OctaveFormBuilder<T>({
               <OctaveRadioInput
                 key={field.name as string}
                 {...(mergedProps as RadioProps)}
+              />
+            );
+          case 'date':
+            return (
+              <OctaveDateInput
+                key={field.name as string}
+                {...(mergedProps as DatePickerInputProps)}
               />
             );
           default:

@@ -77,8 +77,8 @@ export function OctaveShell({
   }, []);
 
   const icon = {
-    light: <IconSun size={18} />,
-    dark: <IconMoon size={18} />,
+    dark: <IconSun size={18} />,
+    light: <IconMoon size={18} />,
   };
 
   const links = menu.map((item: OctaveLinksGroupProps) => (

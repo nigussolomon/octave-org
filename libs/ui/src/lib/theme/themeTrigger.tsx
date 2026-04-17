@@ -13,13 +13,13 @@ export function ThemeTrigger() {
   }, []);
 
   const icon = {
-    light: <IconSun size={18} />,
-    dark: <IconMoon size={18} />,
+    dark: <IconSun size={18} />,
+    light: <IconMoon size={18} />,
   };
 
   if (!mounted) {
     return (
-      <ActionIcon size="lg" variant="default">
+      <ActionIcon loading size="lg" variant="default">
         <IconSun size={18} />
       </ActionIcon>
     );

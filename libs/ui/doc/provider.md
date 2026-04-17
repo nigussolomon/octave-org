@@ -21,7 +21,7 @@ Sets up Mantine's `MantineProvider` with the default Octave theme, registers the
 - Renders `<MantineProvider defaultColorScheme="light">` with the resolved theme.
 - Mounts `<Notifications />` so notification helpers (`success`, `info`, `warning`, `error`) work anywhere in the tree.
 - Provides an `OctaveBrandingProvider` context used by shell and auth components to resolve logo, company name, and slogan.
-- Imports `@mantine/core/styles.css` and `@mantine/notifications/styles.css`.
+- Loads Mantine styles from the package entrypoint (`@octave-org/ui`), including core, notifications, and charts styles.
 
 ### Example
 

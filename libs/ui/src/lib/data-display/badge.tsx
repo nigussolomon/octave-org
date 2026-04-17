@@ -11,6 +11,8 @@ export function OctaveBadge(props: OctaveBadgeProps) {
   return (
     <Flex>
       <Card
+        h="fit-content"
+        w="fit-content"
         withBorder
         style={{
           borderWidth: 2,

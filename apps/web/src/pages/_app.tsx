@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import '@octave-org/ui/styles.css';
 import {
   createTheme,
   MantineColorsTuple,

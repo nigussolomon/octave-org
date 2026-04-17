@@ -28,6 +28,7 @@ export interface AuthFormConfig<T extends object> {
 
   primaryAction: {
     label: string;
+    loading?: boolean;
     onSubmit: (values: T) => void | Promise<void>;
   };
 
@@ -35,6 +36,7 @@ export interface AuthFormConfig<T extends object> {
     label: string;
     link?: string;
     onClick?: () => void;
+    loading?: boolean;
     variant?: 'outline' | 'default' | 'filled';
     context?: OctaveButtonContext;
     linkLabel?: string;
@@ -114,7 +116,7 @@ export function OctaveAuthForm<T extends object>({
                     type: 'submit',
                     fullWidth: true,
                     label: config.primaryAction.label,
-                    loading: form.submitting,
+                    loading: config.primaryAction.loading || form.submitting,
                   }}
                   labelProps={{ case: 'uppercase' }}
                 />
@@ -137,6 +139,7 @@ export function OctaveAuthForm<T extends object>({
                         context: config.secondaryAction.context || 'primary',
                         link: config.secondaryAction.link,
                         action: config.secondaryAction.onClick,
+                        loading: config.secondaryAction.loading,
                       }}
                       labelProps={{ case: 'uppercase' }}
                     />

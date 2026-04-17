@@ -10,6 +10,7 @@ import {
   PaginationProps,
   Stack,
   Table,
+  TableProps,
   Text,
   TextProps,
 } from '@mantine/core';
@@ -62,6 +63,7 @@ export interface OctaveTableProps<T> {
     props?: PaginationProps;
   };
   idKey?: keyof T;
+  tableProps?: TableProps;
 }
 
 function EmptyTable() {
@@ -171,6 +173,7 @@ export function OctaveTable<T>({
   idKey,
   pagination,
   leftSection,
+  tableProps,
 }: OctaveTableProps<T>) {
   const { isMobile } = useBreakpoints();
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
@@ -191,6 +194,19 @@ export function OctaveTable<T>({
       col.visible !== false && !hiddenColumns.includes(col.key as string),
   );
 
+  const totalPages = pagination
+    ? Math.max(1, Math.ceil(pagination.total / pagination.pageSize))
+    : 0;
+
+  const paginationProps = pagination
+    ? {
+        ...pagination.props,
+        page: pagination.page,
+        total: totalPages,
+        onChange: pagination.onPageChange,
+      }
+    : undefined;
+
   const toggleHide = (key: string) => {
     setHiddenColumns((prev) =>
       prev.includes(key) ? prev.filter((i) => i !== key) : [...prev, key],
@@ -204,45 +220,47 @@ export function OctaveTable<T>({
     if (data?.length === 0) {
       return <EmptyTable />;
     }
-    return data?.map((d: T, idx) => (
-      <Stack key={idKey ? String(d[idKey]) : String(idx)}>
-        <Card p={0} withBorder>
-          <Table
-            variant="vertical"
-            layout="fixed"
-            horizontalSpacing="md"
-            withRowBorders
-          >
-            <Table.Tbody>
-              {visibleColumns?.map((col) => (
-                <Table.Tr key={col.key as string}>
-                  <Table.Th w={160}>{col.label}</Table.Th>
-                  <Table.Td key={col.key as string}>
-                    {col.render
-                      ? col.render(
-                          (d as Record<string, unknown>)[col.key as string],
-                          d,
-                        )
-                      : ((d as Record<string, unknown>)[
-                          col.key as string
-                        ] as React.ReactNode)}
-                  </Table.Td>
-                </Table.Tr>
-              ))}
-            </Table.Tbody>
-          </Table>
-        </Card>
-        <Flex justify="center">
-          {pagination && (
-            <Pagination size="xs" {...pagination} {...pagination.props} />
-          )}
-        </Flex>
+    return (
+      <Stack>
+        {data?.map((d: T, idx) => (
+          <Card key={idKey ? String(d[idKey]) : String(idx)} p={0} withBorder>
+            <Table
+              variant="vertical"
+              layout="fixed"
+              horizontalSpacing="md"
+              withRowBorders
+            >
+              <Table.Tbody>
+                {visibleColumns?.map((col) => (
+                  <Table.Tr key={col.key as string}>
+                    <Table.Th w={160}>{col.label}</Table.Th>
+                    <Table.Td key={col.key as string}>
+                      {col.render
+                        ? col.render(
+                            (d as Record<string, unknown>)[col.key as string],
+                            d,
+                          )
+                        : ((d as Record<string, unknown>)[
+                            col.key as string
+                          ] as React.ReactNode)}
+                    </Table.Td>
+                  </Table.Tr>
+                ))}
+              </Table.Tbody>
+            </Table>
+          </Card>
+        ))}
+        {paginationProps && (
+          <Flex justify="center">
+            <Pagination withControls={false} size="md" {...paginationProps} />
+          </Flex>
+        )}
       </Stack>
-    ));
+    );
   }
 
   return (
-    <Stack>
+    <Stack flex={1} mih={0}>
       <Flex align="center" justify="space-between">
         <div>{leftSection}</div>
         {hiddenColumns.length > 0 && (
@@ -259,7 +277,7 @@ export function OctaveTable<T>({
         )}
       </Flex>
 
-      <Card p={0} withBorder>
+      <Card p={0} withBorder flex={1} mih={0} mah={'100%'}>
         <DndContext
           id="stable-dnd-context"
           sensors={sensors}
@@ -276,66 +294,75 @@ export function OctaveTable<T>({
             }
           }}
         >
-          <Table
-            highlightOnHover
-            striped
-            verticalSpacing="xs"
-            horizontalSpacing="md"
-            withRowBorders
+          <Table.ScrollContainer
+            type="native"
+            minWidth={'100%'}
+            mih={0}
+            mah={'100%'}
           >
-            <Table.Thead>
-              <SortableContext
-                items={visibleColumns.map((c) => c.key as string)}
-                strategy={horizontalListSortingStrategy}
-              >
-                <Table.Tr>
-                  {visibleColumns.map((col) => (
-                    <SortableHeader
-                      key={col.key as string}
-                      col={col}
-                      visibleColumns={visibleColumns}
-                      toggleHide={toggleHide}
-                    />
-                  ))}
-                </Table.Tr>
-              </SortableContext>
-            </Table.Thead>
-
-            <Table.Tbody>
-              {loading ? (
-                <Table.Tr>
-                  <Table.Td colSpan={visibleColumns.length}>
-                    <LoadingTable />
-                  </Table.Td>
-                </Table.Tr>
-              ) : data.length > 0 ? (
-                data.map((row, idx) => (
-                  <Table.Tr key={idKey ? String(row[idKey]) : String(idx)}>
+            <Table
+              stickyHeader
+              stickyHeaderOffset={0}
+              highlightOnHover
+              striped
+              verticalSpacing="xs"
+              horizontalSpacing="md"
+              withRowBorders
+            >
+              <Table.Thead>
+                <SortableContext
+                  items={visibleColumns.map((c) => c.key as string)}
+                  strategy={horizontalListSortingStrategy}
+                >
+                  <Table.Tr>
                     {visibleColumns.map((col) => (
-                      <Table.Td px="xl" key={col.key as string}>
-                        {col.render
-                          ? col.render(
-                              (row as Record<string, unknown>)[
-                                col.key as string
-                              ],
-                              row,
-                            )
-                          : ((row as Record<string, unknown>)[
-                              col.key as string
-                            ] as React.ReactNode)}
-                      </Table.Td>
+                      <SortableHeader
+                        key={col.key as string}
+                        col={col}
+                        visibleColumns={visibleColumns}
+                        toggleHide={toggleHide}
+                      />
                     ))}
                   </Table.Tr>
-                ))
-              ) : (
-                <Table.Tr>
-                  <Table.Td colSpan={visibleColumns.length}>
-                    <EmptyTable />
-                  </Table.Td>
-                </Table.Tr>
-              )}
-            </Table.Tbody>
-          </Table>
+                </SortableContext>
+              </Table.Thead>
+
+              <Table.Tbody>
+                {loading ? (
+                  <Table.Tr>
+                    <Table.Td colSpan={visibleColumns.length}>
+                      <LoadingTable />
+                    </Table.Td>
+                  </Table.Tr>
+                ) : data.length > 0 ? (
+                  data.map((row, idx) => (
+                    <Table.Tr key={idKey ? String(row[idKey]) : String(idx)}>
+                      {visibleColumns.map((col) => (
+                        <Table.Td px="xl" key={col.key as string}>
+                          {col.render
+                            ? col.render(
+                                (row as Record<string, unknown>)[
+                                  col.key as string
+                                ],
+                                row,
+                              )
+                            : ((row as Record<string, unknown>)[
+                                col.key as string
+                              ] as React.ReactNode)}
+                        </Table.Td>
+                      ))}
+                    </Table.Tr>
+                  ))
+                ) : (
+                  <Table.Tr>
+                    <Table.Td colSpan={visibleColumns.length}>
+                      <EmptyTable />
+                    </Table.Td>
+                  </Table.Tr>
+                )}
+              </Table.Tbody>
+            </Table>
+          </Table.ScrollContainer>
         </DndContext>
       </Card>
       {pagination && (
@@ -347,10 +374,10 @@ export function OctaveTable<T>({
               </Text>
               <Divider orientation="vertical" />
               <Text size="xs">
-                Page {pagination.page} of {pagination.total}
+                Page {pagination.page} of {totalPages}
               </Text>
             </Flex>
-            {pagination && <Pagination {...pagination} {...pagination.props} />}
+            {paginationProps && <Pagination {...paginationProps} />}
           </Flex>
         </Card>
       )}

@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "devDependencies": {
     "@mantine/charts": "^9.0.1",
+    "@mantine/dates": "^9.0.2",
+    "dayjs": "^1.11.20",
     "@mantine/modals": "^9.0.1",
     "recharts": "^3.8.1",
     "@reduxjs/toolkit": "^2.11.2",
@@ -75,5 +77,6 @@
   "workspaces": [
     "apps/*",
     "libs/*"
-  ]
+  ],
+  "dependencies": {}
 }

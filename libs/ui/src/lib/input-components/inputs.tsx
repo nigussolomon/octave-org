@@ -19,6 +19,11 @@ import {
 import React, { useState } from 'react';
 import { IconEye, IconEyeOff } from '@tabler/icons-react';
 import Link from 'next/link';
+import {
+  DatePickerInput,
+  DatePickerInputProps,
+  DatesProvider,
+} from '@mantine/dates';
 
 const containedStyle = () => {
   return {
@@ -209,5 +214,20 @@ export function OctaveRadioInput(props: RadioProps) {
         </Flex>
       </Card>
     </Stack>
+  );
+}
+
+export function OctaveDateInput(props: DatePickerInputProps) {
+  return (
+    <InputWrapper error={props.error} description={props.description}>
+      <DatesProvider settings={{ locale: 'am' }}>
+        <DatePickerInput
+          {...props}
+          styles={containedStyle()}
+          error={null}
+          description={null}
+        />
+      </DatesProvider>
+    </InputWrapper>
   );
 }

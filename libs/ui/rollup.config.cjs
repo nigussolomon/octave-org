@@ -1,6 +1,22 @@
 const { withNx } = require('@nx/rollup/with-nx');
 const url = require('@rollup/plugin-url');
 const svg = require('@svgr/rollup');
+const fs = require('node:fs');
+const path = require('node:path');
+
+function emitStylesCss() {
+  return {
+    name: 'emit-styles-css',
+    generateBundle() {
+      const stylesPath = path.resolve(__dirname, 'src/styles.css');
+      this.emitFile({
+        type: 'asset',
+        fileName: 'styles.css',
+        source: fs.readFileSync(stylesPath, 'utf8'),
+      });
+    },
+  };
+}
 
 const externalPackages = new Set([
   'react',
@@ -41,6 +57,7 @@ module.exports = withNx(
       url({
         limit: 10000, // 10kB
       }),
+      emitStylesCss(),
     ],
   },
 );

@@ -8,6 +8,7 @@ import {
   OctaveButton,
   OctaveCheckboxInput,
   OctaveCol,
+  OctaveDateInput,
   OctaveNumberInput,
   OctaveRadioInput,
   OctaveSecureInput,
@@ -161,6 +162,7 @@ const Home: OctaveShellProps = () => {
           placeholder="Your password"
           description="Enter your password here"
         />
+        <OctaveDateInput label="Date Input" placeholder="Select Date" />
       </Flex>
       <Flex align="center" wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
         <Stack>
@@ -309,46 +311,128 @@ const Home: OctaveShellProps = () => {
           onPageChange: (page) => setPage(page),
         }}
       />
-      <OctaveTable
-        data={[
-          {
-            firstName: 'John',
-            lastName: 'Doe',
-            status: '',
-          },
-          {
-            firstName: 'John',
-            lastName: 'Doe',
-            status: '',
-          },
-          {
-            firstName: 'John',
-            lastName: 'Doe',
-            status: '',
-          },
-          {
-            firstName: 'John',
-            lastName: 'Doe',
-            status: '',
-          },
-          {
-            firstName: 'John',
-            lastName: 'Doe',
-            status: '',
-          },
-          {
-            firstName: 'John',
-            lastName: 'Doe',
-            status: '',
-          },
-          {
-            firstName: 'John',
-            lastName: 'Doe',
-            status: '',
-          },
-        ]}
-        columns={columns}
-      />
+      <Stack mah={200}>
+        <OctaveTable
+          data={[
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+            {
+              firstName: 'John',
+              lastName: 'Doe',
+              status: '',
+            },
+          ]}
+          columns={columns}
+        />
+      </Stack>
     </Stack>
   );
 };

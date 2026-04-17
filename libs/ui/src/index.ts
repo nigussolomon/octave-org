@@ -4,6 +4,7 @@ export * from '@mantine/hooks';
 export * from '@mantine/notifications';
 export * from '@mantine/charts';
 export * from '@mantine/modals';
+export * from '@mantine/dates';
 
 export * from './components';
 export * from './utils';

@@ -38,6 +38,7 @@ const OctaveOtpPage = () => {
 };
 
 OctaveOtpPage.disabled = true;
+OctaveOtpPage.disableAuth = true;
 OctaveOtpPage.disablePadding = true;
 
 export default OctaveOtpPage;

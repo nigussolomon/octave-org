@@ -47,6 +47,7 @@ const OctaveForgotPasswordPage = () => {
 };
 
 OctaveForgotPasswordPage.disabled = true;
+OctaveForgotPasswordPage.disableAuth = true;
 OctaveForgotPasswordPage.disablePadding = true;
 
 export default OctaveForgotPasswordPage;

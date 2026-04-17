@@ -1,11 +1,15 @@
 import Head from 'next/head';
 import '@octave-org/ui/styles.css';
 import {
+  Center,
   createTheme,
+  Loader,
   MantineColorsTuple,
   OctaveProvider,
   OctaveShell,
   OctaveShellProps,
+  Stack,
+  Text,
   ThemeIcon,
 } from '@octave-org/ui';
 import { DM_Sans } from 'next/font/google';
@@ -125,6 +129,9 @@ const mockdata: OctaveLinksGroupProps[] = [
 ];
 
 export default function App({ Component, pageProps }: ShellLayoutProps) {
+  const enableAuthDevBypass =
+    process.env.NEXT_PUBLIC_AUTH_DEV_BYPASS === 'true';
+
   return (
     <main className={dmSans.className}>
       <Head>
@@ -139,10 +146,16 @@ export default function App({ Component, pageProps }: ShellLayoutProps) {
         <OctaveShell
           props={{
             disabled: Component.disabled,
+            disableAuth: Component.disableAuth,
             title: Component.title,
             description: Component.description,
             hasBack: Component.hasBack,
             disablePadding: Component.disablePadding,
+            authGuardProps: {
+              authRoute: '/auth',
+              devBypass: enableAuthDevBypass,
+              requireRefreshToken: true,
+            },
           }}
           menu={mockdata}
           user={{

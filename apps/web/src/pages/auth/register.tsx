@@ -117,6 +117,7 @@ const OctaveRegisterPage = () => {
 };
 
 OctaveRegisterPage.disabled = true;
+OctaveRegisterPage.disableAuth = true;
 OctaveRegisterPage.disablePadding = true;
 
 export default OctaveRegisterPage;

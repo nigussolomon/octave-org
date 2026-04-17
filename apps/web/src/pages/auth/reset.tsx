@@ -72,6 +72,7 @@ const OctaveResetPasswordPage = () => {
 };
 
 OctaveResetPasswordPage.disabled = true;
+OctaveResetPasswordPage.disableAuth = true;
 OctaveResetPasswordPage.disablePadding = true;
 
 export default OctaveResetPasswordPage;

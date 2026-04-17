@@ -1,5 +1,6 @@
-import { error, OctaveAuthForm } from '@octave-org/ui';
+import { OctaveAuthForm, setTokens, success } from '@octave-org/ui';
 import { IconLockAccess } from '@tabler/icons-react';
+import { useRouter } from 'next/router';
 
 interface LoginValues {
   email: string;
@@ -8,6 +9,29 @@ interface LoginValues {
 }
 
 const OctaveLoginPage = () => {
+  const router = useRouter();
+
+  const createDemoJwt = () => {
+    const header = { alg: 'HS256', typ: 'JWT' };
+
+    const now = Math.floor(Date.now() / 1000);
+    const payload = {
+      sub: 'demo-user',
+      role: 'admin',
+      iat: now,
+      nbf: now - 10,
+      exp: now + 60 * 60,
+    };
+
+    const encode = (value: Record<string, unknown>) =>
+      btoa(JSON.stringify(value))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/g, '');
+
+    return `${encode(header)}.${encode(payload)}.demo-signature`;
+  };
+
   return (
     <OctaveAuthForm<LoginValues>
       config={{
@@ -37,14 +61,18 @@ const OctaveLoginPage = () => {
         ],
         primaryAction: {
           label: 'Sign in',
-          onSubmit: (values: LoginValues) => {
-            error({
-              title: 'Login Failed',
-              description: 'Invalid credentials',
+          onSubmit: async (values: LoginValues) => {
+            setTokens(createDemoJwt(), 'demo-refresh-token');
+
+            success({
+              title: 'Login successful',
+              description: `Welcome back, ${values.email}`,
               baseProps: {
                 position: 'top-right',
               },
             });
+
+            await router.push('/');
           },
         },
         secondaryAction: { label: 'Sign up', link: '/auth/register' },
@@ -60,6 +88,7 @@ const OctaveLoginPage = () => {
 };
 
 OctaveLoginPage.disabled = true;
+OctaveLoginPage.disableAuth = true;
 OctaveLoginPage.disablePadding = true;
 
 export default OctaveLoginPage;

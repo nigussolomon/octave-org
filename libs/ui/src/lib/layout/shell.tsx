@@ -6,6 +6,7 @@ import {
   Card,
   Divider,
   Flex,
+  Loader,
   Menu,
   ScrollArea,
   Stack,
@@ -26,14 +27,18 @@ import { OctaveLinksGroup, OctaveLinksGroupProps } from './nav-links';
 import { useBreakpoints } from '../../utils';
 import { ThemeTrigger } from '../theme';
 import { OctaveBranding, useOctaveBranding } from '../branding';
+import AuthGuard, { AuthGuardProps } from '../guards/auth.guard';
 import { useEffect, useState } from 'react';
 
 export type OctaveShellProps = {
   disablePadding?: boolean;
   disabled?: boolean;
+  disableAuth?: boolean;
+  authLoadingFallback?: React.ReactNode;
   title?: string;
   description?: string;
   hasBack?: boolean;
+  authGuardProps?: Omit<AuthGuardProps, 'children'>;
 };
 
 export type OctavePageProps<P = Record<string, unknown>, IP = P> = NextPage<
@@ -64,6 +69,7 @@ export function OctaveShell({
   };
 }) {
   const [mounted, setMounted] = useState(false);
+  const [isAuthGuardLoading, setIsAuthGuardLoading] = useState(true);
   const [opened, { toggle }] = useDisclosure(true);
   const theme = useMantineTheme();
   const { setColorScheme, colorScheme } = useMantineColorScheme();
@@ -84,6 +90,38 @@ export function OctaveShell({
   const links = menu.map((item: OctaveLinksGroupProps) => (
     <OctaveLinksGroup shellOpened={opened} {...item} key={item.label} />
   ));
+
+  const shouldDisableAuth = props.disableAuth ?? false;
+  const isEffectiveAuthLoading = shouldDisableAuth ? false : isAuthGuardLoading;
+  const isShellDisabled = !!props.disabled || isEffectiveAuthLoading;
+
+  const defaultAuthLoadingFallback = (
+    <Stack h="100vh" w="100%" align="center" justify="center" gap="xs">
+      <Loader type="bars" size="xl" />
+    </Stack>
+  );
+
+  const resolvedAuthLoadingFallback =
+    props.authGuardProps?.loadingFallback ??
+    props.authLoadingFallback ??
+    defaultAuthLoadingFallback;
+
+  const handleAuthLoadingStateChange = (isLoading: boolean) => {
+    setIsAuthGuardLoading(isLoading);
+    props.authGuardProps?.onLoadingStateChange?.(isLoading);
+  };
+
+  const shellContent = shouldDisableAuth ? (
+    children
+  ) : (
+    <AuthGuard
+      {...props.authGuardProps}
+      loadingFallback={resolvedAuthLoadingFallback}
+      onLoadingStateChange={handleAuthLoadingStateChange}
+    >
+      {children}
+    </AuthGuard>
+  );
 
   const NavLogo = () => (
     <Flex gap="xs" align="center">
@@ -182,7 +220,7 @@ export function OctaveShell({
   return (
     <AppShell
       layout="alt"
-      disabled={props.disabled}
+      disabled={isShellDisabled}
       header={{ height: isMobile ? 80 : 0 }}
       padding={props.disablePadding ? 0 : 'md'}
       navbar={{
@@ -270,7 +308,7 @@ export function OctaveShell({
       </AppShell.Navbar>
       <AppShell.Main
         bg={
-          props.disabled
+          isShellDisabled
             ? undefined
             : mounted && colorScheme === 'dark'
               ? 'dark'
@@ -282,12 +320,12 @@ export function OctaveShell({
           h={
             isMobile
               ? `calc(${optimalHeight} - 120px)`
-              : props.disablePadding || props.disabled
+              : props.disablePadding || isShellDisabled
                 ? '100vh'
                 : '96vh'
           }
         >
-          {children}
+          {shellContent}
         </ScrollArea>
       </AppShell.Main>
     </AppShell>

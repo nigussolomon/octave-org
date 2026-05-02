@@ -41,6 +41,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { useBreakpoints } from '../../utils';
 
 export interface OctaveCol<T> {
+  id?: string;
   key: keyof T | 'actions';
   label: string;
   labelProps?: TextProps;
@@ -86,17 +87,21 @@ function LoadingTable() {
   );
 }
 
+type InternalOctaveCol<T> = OctaveCol<T> & {
+  columnId: string;
+};
+
 function SortableHeader<T>({
   col,
   toggleHide,
   visibleColumns,
 }: {
-  col: OctaveCol<T>;
+  col: InternalOctaveCol<T>;
   toggleHide: (key: string) => void;
-  visibleColumns: OctaveCol<T>[];
+  visibleColumns: InternalOctaveCol<T>[];
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: col.key as string });
+    useSortable({ id: col.columnId });
 
   const style = {
     transform: transform
@@ -143,7 +148,7 @@ function SortableHeader<T>({
         <Flex gap="xs" align="center">
           {visibleColumns.length > 1 && (
             <ActionIcon
-              onClick={() => toggleHide(col.key as string)}
+              onClick={() => toggleHide(col.columnId)}
               variant="default"
               size="md"
             >
@@ -178,20 +183,28 @@ export function OctaveTable<T>({
   const { isMobile } = useBreakpoints();
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [columnOrder, setColumnOrder] = useState<string[]>(
-    columns.map((c) => c.key as string),
+    columns.map((c, index) => c.id ?? `${String(c.key)}-${index}`),
+  );
+
+  const internalColumns = useMemo<InternalOctaveCol<T>[]>(
+    () =>
+      columns.map((col, index) => ({
+        ...col,
+        columnId: col.id ?? `${String(col.key)}-${index}`,
+      })),
+    [columns],
   );
 
   const sensors = useSensors(useSensor(PointerSensor));
 
   const orderedColumns = useMemo(() => {
     return columnOrder
-      .map((key) => columns.find((c) => c.key === key))
-      .filter(Boolean) as OctaveCol<T>[];
-  }, [columnOrder, columns]);
+      .map((columnId) => internalColumns.find((c) => c.columnId === columnId))
+      .filter(Boolean) as InternalOctaveCol<T>[];
+  }, [columnOrder, internalColumns]);
 
   const visibleColumns = orderedColumns.filter(
-    (col) =>
-      col.visible !== false && !hiddenColumns.includes(col.key as string),
+    (col) => col.visible !== false && !hiddenColumns.includes(col.columnId),
   );
 
   const totalPages = pagination
@@ -232,9 +245,9 @@ export function OctaveTable<T>({
             >
               <Table.Tbody>
                 {visibleColumns?.map((col) => (
-                  <Table.Tr key={col.key as string}>
+                  <Table.Tr key={col.columnId}>
                     <Table.Th w={160}>{col.label}</Table.Th>
-                    <Table.Td key={col.key as string}>
+                    <Table.Td key={col.columnId}>
                       {col.render
                         ? col.render(
                             (d as Record<string, unknown>)[col.key as string],
@@ -267,8 +280,8 @@ export function OctaveTable<T>({
           <MultiSelect
             miw={200}
             label="Hidden columns"
-            data={columns.map((col) => ({
-              value: col.key as string,
+            data={internalColumns.map((col) => ({
+              value: col.columnId,
               label: col.label,
             }))}
             value={hiddenColumns}
@@ -311,13 +324,13 @@ export function OctaveTable<T>({
             >
               <Table.Thead>
                 <SortableContext
-                  items={visibleColumns.map((c) => c.key as string)}
+                  items={visibleColumns.map((c) => c.columnId)}
                   strategy={horizontalListSortingStrategy}
                 >
                   <Table.Tr>
                     {visibleColumns.map((col) => (
                       <SortableHeader
-                        key={col.key as string}
+                        key={col.columnId}
                         col={col}
                         visibleColumns={visibleColumns}
                         toggleHide={toggleHide}

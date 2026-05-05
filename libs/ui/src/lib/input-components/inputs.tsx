@@ -217,7 +217,14 @@ export function OctaveRadioInput(props: RadioProps) {
   );
 }
 
-export function OctaveDateInput(props: DatePickerInputProps) {
+type PickerType = 'default' | 'range' | 'multiple';
+
+export type OctaveDateInputProps<T extends PickerType = 'default'> =
+  DatePickerInputProps<T>;
+
+export function OctaveDateInput<T extends PickerType = 'default'>(
+  props: OctaveDateInputProps<T>,
+) {
   return (
     <InputWrapper error={props.error} description={props.description}>
       <DatesProvider settings={{ locale: 'am' }}>

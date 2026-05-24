@@ -8,6 +8,7 @@ interface RegisterValues {
   password: string;
   confirmPassword: string;
   agree: boolean;
+  marketingConsent?: boolean;
 }
 
 const OctaveRegisterPage = () => {
@@ -74,6 +75,17 @@ const OctaveRegisterPage = () => {
             props: {
               label: 'I accept Terms',
               description: 'Terms & Service for Octave',
+              hasLink: true,
+              linkHref: '#',
+              linkText: 'Read Terms',
+            },
+          },
+          {
+            type: 'checkbox',
+            name: 'marketingConsent',
+            props: {
+              label: 'Subscribe to Marketing Emails',
+              description: 'Recieve emails about Octave updates and promotions',
             },
           },
         ],
@@ -87,6 +99,15 @@ const OctaveRegisterPage = () => {
         title: 'Welcome to Octave',
         description: 'Enter your information to continue',
         icon: <IconMoodHappy size={80} stroke={1} />,
+        wrapperProps: {
+          overlayProps: {
+            blur: 100,
+          },
+          brandingTextProps: {
+            title: { c: 'black' },
+            description: { c: 'black' },
+          },
+        },
         rows,
         primaryAction: { label: 'Sign up', onSubmit: (v) => console.log(v) },
         secondaryAction: {

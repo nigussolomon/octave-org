@@ -40,7 +40,7 @@ export function OctaveStatCard(props: OctaveStatCardProps) {
   return (
     <Card {...props.cardProps} p="xl" withBorder>
       <Stack>
-        <Flex justify="space-between">
+        <Flex justify="space-between" align="center">
           {Icon && <Icon stroke={1.3} size={35} />}
 
           <Flex align="center" gap="xs">
@@ -49,6 +49,7 @@ export function OctaveStatCard(props: OctaveStatCardProps) {
                 variant="light"
                 size="xs"
                 color={colorMap?.[props.direction]}
+                radius={1000}
               >
                 {props.direction === 'up' ? (
                   <IconArrowUp size={12} />

@@ -1,15 +1,11 @@
 import Head from 'next/head';
 import '@octave-org/ui/styles.css';
 import {
-  Center,
   createTheme,
-  Loader,
   MantineColorsTuple,
   OctaveProvider,
   OctaveShell,
   OctaveShellProps,
-  Stack,
-  Text,
   ThemeIcon,
 } from '@octave-org/ui';
 import { DM_Sans } from 'next/font/google';
@@ -48,16 +44,16 @@ const dmSans = DM_Sans({
 });
 
 const primary: MantineColorsTuple = [
-  '#fff0e4',
-  '#ffe0cf',
-  '#fac0a1',
-  '#f69e6e',
-  '#f28043',
-  '#f06e27',
-  '#f06418',
-  '#d6530c',
-  '#bf4906',
-  '#a73c00',
+  '#fdfce4',
+  '#f8f6d3',
+  '#f0ecaa',
+  '#e7e17c',
+  '#e0d856',
+  '#dbd33e',
+  '#d9d02f',
+  '#c0b820',
+  '#aaa317',
+  '#928d03',
 ];
 
 export const octaveTheme = createTheme({
@@ -65,6 +61,7 @@ export const octaveTheme = createTheme({
     primary: primary,
   },
   primaryColor: 'primary',
+  primaryShade: 9,
   defaultRadius: 'md',
   fontFamily: 'DM Sans, sans-serif',
 });

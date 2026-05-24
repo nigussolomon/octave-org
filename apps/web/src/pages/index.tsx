@@ -85,12 +85,10 @@ const Home: OctaveShellProps = () => {
       <Flex wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
         <OctaveButton
           btnProps={{
-            label: 'Click me',
+            flex: 1,
+            label: 'Click me ',
             action: () =>
               info({
-                baseProps: {
-                  position: 'top-right',
-                },
                 title: 'Info Notification',
                 description: 'This is a custom styled info Notification.',
               }),
@@ -99,6 +97,7 @@ const Home: OctaveShellProps = () => {
         />
         <OctaveButton
           btnProps={{
+            flex: 1,
             context: 'success',
             label: 'Click me',
             action: () =>
@@ -111,6 +110,7 @@ const Home: OctaveShellProps = () => {
         />
         <OctaveButton
           btnProps={{
+            flex: 1,
             context: 'warning',
             label: 'Click me',
             action: () =>
@@ -123,6 +123,7 @@ const Home: OctaveShellProps = () => {
         />
         <OctaveButton
           btnProps={{
+            flex: 1,
             context: 'destructive',
             label: 'Click me',
             action: () =>
@@ -165,12 +166,21 @@ const Home: OctaveShellProps = () => {
         <OctaveDateInput label="Date Input" placeholder="Select Date" />
       </Flex>
       <Flex align="center" wrap={{ base: 'wrap', md: 'nowrap' }} gap="xs">
-        <Stack>
-          <OctaveCheckboxInput
-            label="Checkbox Input"
-            description="Select an option"
-          />
-        </Stack>
+        <OctaveCheckboxInput
+          label="Checkbox Input"
+          description="Select an option"
+        />
+        <OctaveCheckboxInput
+          label="Checkbox Input"
+          description="Select an option"
+          hasLink
+          linkHref="#"
+          linkText="Terms & Conditions"
+          anchorProps={{
+            underline: 'always',
+          }}
+        />
+
         <RadioGroup>
           <Stack>
             <OctaveRadioInput
@@ -180,6 +190,17 @@ const Home: OctaveShellProps = () => {
             />
           </Stack>
         </RadioGroup>
+        <OctaveRadioInput
+          value="react"
+          label="Radio Input"
+          description="Select an option"
+          hasLink
+          linkHref="#"
+          linkText="Terms & Conditions"
+          anchorProps={{
+            underline: 'always',
+          }}
+        />
       </Flex>
       <Divider label="Badge Components" />
       <Flex gap="xs">
@@ -295,7 +316,7 @@ const Home: OctaveShellProps = () => {
         ]}
         columns={columns}
         pagination={{
-          total: 100,
+          total: 1000,
           page: page,
           pageSize: 10,
           onPageChange: (page) => setPage(page),

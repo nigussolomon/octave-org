@@ -71,7 +71,9 @@ function EmptyTable() {
   return (
     <Stack w="100%" mih={150} justify="center" align="center">
       <IconTable size={50} color="gray" />
-      <Text c="dimmed">Table is empty!</Text>
+      <Text size="xs" c="dimmed">
+        Table is empty!
+      </Text>
     </Stack>
   );
 }
@@ -178,9 +180,8 @@ export function OctaveTable<T>({
   idKey,
   pagination,
   leftSection,
-  tableProps,
 }: OctaveTableProps<T>) {
-  const { isMobile } = useBreakpoints();
+  const { isMobile, isTablet } = useBreakpoints();
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [columnOrder, setColumnOrder] = useState<string[]>(
     columns.map((c, index) => c.id ?? `${String(c.key)}-${index}`),
@@ -264,9 +265,23 @@ export function OctaveTable<T>({
           </Card>
         ))}
         {paginationProps && (
-          <Flex justify="center">
-            <Pagination withControls={false} size="md" {...paginationProps} />
-          </Flex>
+          <Stack align="center">
+            <Flex gap={10}>
+              <Text size="xs" c="dimmed">
+                Total: {paginationProps.total}
+              </Text>
+              <Divider orientation="vertical" />
+              <Text size="xs" c="dimmed">
+                Page: {paginationProps.page} of {totalPages}
+              </Text>
+            </Flex>
+            <Pagination
+              siblings={0}
+              withControls={true}
+              size="md"
+              {...paginationProps}
+            />
+          </Stack>
         )}
       </Stack>
     );
@@ -380,14 +395,19 @@ export function OctaveTable<T>({
       </Card>
       {pagination && (
         <Card withBorder>
-          <Flex align="center" justify="space-between">
+          <Flex
+            gap="xs"
+            align="center"
+            wrap="wrap"
+            justify={isTablet ? 'center' : 'space-between'}
+          >
             <Flex gap="md" align="center">
               <Text size="xs" fw={500}>
-                {pagination.total} items
+                Total: {pagination.total}
               </Text>
               <Divider orientation="vertical" />
               <Text size="xs">
-                Page {pagination.page} of {totalPages}
+                Page {pagination.page} / {totalPages}
               </Text>
             </Flex>
             {paginationProps && <Pagination {...paginationProps} />}

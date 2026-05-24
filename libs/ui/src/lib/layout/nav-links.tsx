@@ -40,7 +40,11 @@ export function OctaveLinksGroup({
     active || links?.find((link) => link.active) !== undefined;
 
   const NavBtnStates = (isActiveTree: boolean, controlHovered: boolean) =>
-    controlHovered ? 'transparent' : isActiveTree ? 'light' : 'default';
+    controlHovered && !isActiveTree
+      ? 'transparent'
+      : isActiveTree
+        ? 'filled'
+        : 'default';
 
   const items = (hasLinks ? links : []).map((link) => (
     <UnstyledButton
@@ -53,10 +57,10 @@ export function OctaveLinksGroup({
         display: link.hidden ? 'none' : 'block',
         textDecoration: 'none',
         fontWeight: 500,
-        padding: `${theme.spacing.xs} ${theme.spacing.md}`,
+        padding: `5px ${theme.spacing.md}`,
         paddingLeft: theme.spacing.md,
-        marginLeft: theme.spacing.xl,
-        fontSize: theme.fontSizes.sm,
+        marginLeft: '25px',
+        fontSize: 'calc(var(--mantine-font-size-xs) * 1)',
         borderLeft: `${link.active ? '2px' : '1px'} solid ${
           link.active
             ? theme.colors.primary[6]
@@ -81,6 +85,7 @@ export function OctaveLinksGroup({
       style={{
         display: link.hidden ? 'none' : 'block',
         color: link.active ? theme.colors.primary[6] : undefined,
+        fontSize: theme.fontSizes.xs,
       }}
     >
       {link.label}
@@ -99,13 +104,18 @@ export function OctaveLinksGroup({
         width: '100%',
         fontWeight: 500,
         borderRadius: theme.spacing.xs,
-        padding: `${theme.spacing.xs}`,
+        padding: `7px`,
+        marginBlock: '4px',
         fontSize: theme.fontSizes.sm,
-        color:
-          'light-dark(var(--mantine-color-black), var(--mantine-color-white))',
-        backgroundColor: controlHovered
-          ? `light-dark(${theme.colors.primary[0]}, var(--mantine-color-dark-6))`
-          : 'transparent',
+        color: isActiveTree
+          ? 'white'
+          : 'light-dark(var(--mantine-color-black), var(--mantine-color-white))',
+        backgroundColor:
+          controlHovered && !isActiveTree && shellOpened
+            ? `light-dark(${theme.colors.primary[0]}, var(--mantine-color-dark-6))`
+            : isActiveTree && shellOpened
+              ? 'var(--mantine-color-primary-9)'
+              : 'transparent',
       }}
     >
       <Group
@@ -115,19 +125,20 @@ export function OctaveLinksGroup({
         <Box style={{ display: 'flex', alignItems: 'center' }}>
           <ThemeIcon
             variant={NavBtnStates(isActiveTree, controlHovered)}
-            size={35}
+            size={33}
           >
-            <Icon size={18} />
+            <Icon size={15} />
           </ThemeIcon>
-          {shellOpened && <Box ml="md">{label}</Box>}
+          {shellOpened && <Box ml="xs">{label}</Box>}
         </Box>
         {hasLinks && shellOpened && (
           <IconChevronRight
-            stroke={1.5}
+            stroke={1.7}
             size={16}
             style={{
               transform: opened ? 'rotate(-90deg)' : 'none',
               transition: 'transform 200ms ease',
+              marginRight: 10,
             }}
           />
         )}

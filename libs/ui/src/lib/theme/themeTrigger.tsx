@@ -13,21 +13,21 @@ export function ThemeTrigger() {
   }, []);
 
   const icon = {
-    dark: <IconSun size={18} />,
-    light: <IconMoon size={18} />,
+    dark: <IconSun size={14} />,
+    light: <IconMoon size={14} />,
   };
 
   if (!mounted) {
     return (
-      <ActionIcon loading size="lg" variant="default">
-        <IconSun size={18} />
+      <ActionIcon loading size="md" variant="default">
+        <IconSun size={14} />
       </ActionIcon>
     );
   }
 
   return (
     <ActionIcon
-      size="lg"
+      size="md"
       variant="default"
       onClick={() => setColorScheme(colorScheme === 'light' ? 'dark' : 'light')}
     >

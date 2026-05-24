@@ -70,12 +70,13 @@ export function OctaveShell({
 }) {
   const [mounted, setMounted] = useState(false);
   const [isAuthGuardLoading, setIsAuthGuardLoading] = useState(true);
+  const { isMobile } = useBreakpoints();
   const [opened, { toggle }] = useDisclosure(true);
   const theme = useMantineTheme();
   const { setColorScheme, colorScheme } = useMantineColorScheme();
   const appBranding = useOctaveBranding(branding);
-  const { isMobile } = useBreakpoints();
-  const optimalHeight = `calc(100vh - 60px)`;
+
+  const optimalHeight = `calc(100vh - ${isMobile ? '0px' : '60px'})`;
 
   useEffect(() => {
     const timeout = setTimeout(() => setMounted(true), 0);
@@ -196,7 +197,9 @@ export function OctaveShell({
       {opened && (
         <Flex h="100%" w="100%" align="center" justify="space-between">
           <Stack gap={0}>
-            <Text fw={600}>{user?.fullName}</Text>
+            <Text fw={600} size="xs">
+              {user?.fullName}
+            </Text>
             <Text size="xs" c="dimmed">
               {user?.contact}
             </Text>
@@ -205,11 +208,11 @@ export function OctaveShell({
             <ThemeTrigger />
             <ActionIcon
               onClick={user?.logout}
-              size="lg"
+              size="md"
               variant="filled"
               color="red"
             >
-              <IconLogout size={18} />
+              <IconLogout size={14} />
             </ActionIcon>
           </Flex>
         </Flex>
@@ -224,7 +227,7 @@ export function OctaveShell({
       header={{ height: isMobile ? 80 : 0 }}
       padding={props.disablePadding ? 0 : 'md'}
       navbar={{
-        width: !opened ? 85 : 350,
+        width: !opened ? 85 : 300,
         breakpoint: 'sm',
         collapsed: {
           desktop: false,
@@ -290,7 +293,10 @@ export function OctaveShell({
         </AppShell.Section>
         <Divider />
         <AppShell.Section pt="xs" grow>
-          <ScrollArea type="never" h={`calc(${optimalHeight} - 120px)`}>
+          <ScrollArea
+            type="never"
+            h={`calc(${optimalHeight} - ${isMobile ? '180px' : '120px'})`}
+          >
             {links}
           </ScrollArea>
         </AppShell.Section>

@@ -8,6 +8,8 @@ import {
   OctaveRadioInput,
   OctaveSecureInputProps,
   OctaveDateInput,
+  OctaveCheckboxInputProps,
+  OctaveRadioInputProps,
 } from './inputs';
 import {
   TextInputProps,
@@ -32,8 +34,8 @@ export interface FieldConfigMap {
   number: NumberInputProps;
   select: SelectProps;
   secure: OctaveSecureInputProps;
-  checkbox: CheckboxProps;
-  radio: RadioProps;
+  checkbox: OctaveCheckboxInputProps;
+  radio: OctaveRadioInputProps;
   date: DatePickerInputProps;
 }
 

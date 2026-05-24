@@ -1,6 +1,7 @@
 import {
   ActionIcon,
   Anchor,
+  AnchorProps,
   Card,
   Checkbox,
   CheckboxProps,
@@ -177,10 +178,17 @@ export function OctaveSecureInput(props: OctaveSecureInputProps) {
   );
 }
 
-export function OctaveCheckboxInput(props: CheckboxProps) {
+export interface OctaveCheckboxInputProps extends CheckboxProps {
+  hasLink?: boolean;
+  linkHref?: string;
+  linkText?: string;
+  anchorProps?: AnchorProps;
+}
+
+export function OctaveCheckboxInput(props: OctaveCheckboxInputProps) {
   return (
     <Stack>
-      <Card py="xs" pr="xl" withBorder>
+      <Card bg="transparent" p={0} withBorder={false}>
         <Flex gap="xs" align="center">
           <Checkbox {...props} label={null} error={null} description={null} />
           <Stack gap={0}>
@@ -189,6 +197,16 @@ export function OctaveCheckboxInput(props: CheckboxProps) {
             </Text>
             <Text size="xs" c={props.error ? 'red' : 'dimmed'}>
               {props.error || props.description}
+              {props.hasLink && !props.error && ', '}
+              {props.hasLink && !props.error && (
+                <Anchor
+                  {...props.anchorProps}
+                  href={props.linkHref || '#'}
+                  size="xs"
+                >
+                  {props.linkText}
+                </Anchor>
+              )}
             </Text>
           </Stack>
         </Flex>
@@ -197,18 +215,35 @@ export function OctaveCheckboxInput(props: CheckboxProps) {
   );
 }
 
-export function OctaveRadioInput(props: RadioProps) {
+export interface OctaveRadioInputProps extends RadioProps {
+  hasLink?: boolean;
+  linkHref?: string;
+  linkText?: string;
+  anchorProps?: AnchorProps;
+}
+
+export function OctaveRadioInput(props: OctaveRadioInputProps) {
   return (
     <Stack>
-      <Card py="xs" pr="xl" withBorder>
+      <Card bg="transparent" p={0} withBorder={false}>
         <Flex gap="xs" align="center">
           <Radio {...props} label={null} error={null} description={null} />
           <Stack gap={0}>
             <Text size="xs" fw={600}>
               {props.label}
             </Text>
-            <Text size="xs" c="dimmed">
-              {props.description}
+            <Text size="xs" c={props.error ? 'red' : 'dimmed'}>
+              {props.error || props.description}
+              {props.hasLink && !props.error && ', '}
+              {props.hasLink && !props.error && (
+                <Anchor
+                  {...props.anchorProps}
+                  href={props.linkHref || '#'}
+                  size="xs"
+                >
+                  {props.linkText}
+                </Anchor>
+              )}
             </Text>
           </Stack>
         </Flex>

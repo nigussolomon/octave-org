@@ -38,6 +38,11 @@ const OctaveLoginPage = () => {
         title: 'Welcome back',
         description: 'Enter your credentials to continue',
         icon: <IconLockAccess size={80} stroke={1} />,
+        wrapperProps: {
+          overlayProps: {
+            blur: 100,
+          },
+        },
         fields: [
           {
             type: 'text',
@@ -75,7 +80,11 @@ const OctaveLoginPage = () => {
             await router.push('/');
           },
         },
-        secondaryAction: { label: 'Sign up', link: '/auth/register' },
+        secondaryAction: {
+          label: "Don't have an account? ",
+          link: '/auth/register',
+          linkLabel: 'Register Now!',
+        },
       }}
       initialValues={{ email: '', password: '', rememberMe: false }}
       validate={{

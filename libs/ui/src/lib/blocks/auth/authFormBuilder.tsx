@@ -1,6 +1,6 @@
-import { OctaveAuthWrapper } from './wrapper';
+import { OctaveAuthWrapper, OctaveAuthWrapperProps } from './wrapper';
 import { useForm, FormValidateInput } from '@mantine/form';
-import { Stack, Divider, Center, Flex, PinInput } from '@mantine/core';
+import { Stack, Center, Flex, PinInput } from '@mantine/core';
 import {
   OctaveFormBuilder,
   FormFieldConfig,
@@ -8,7 +8,6 @@ import {
 import { OctaveButton, OctaveButtonContext } from '../../input-components';
 import { OctaveStackedText } from '../../text';
 import { OctaveLinkedText } from '../../text/linkedText';
-import { OctaveBranding } from '../../branding';
 
 export interface AuthFormRow<T extends object> {
   columns: FormFieldConfig<T>[][];
@@ -18,8 +17,7 @@ export interface AuthFormConfig<T extends object> {
   title: string;
   description: string;
   icon?: React.ReactNode;
-  branding?: OctaveBranding;
-
+  wrapperProps?: Omit<OctaveAuthWrapperProps, 'children'>;
   rows?: AuthFormRow<T>[];
   fields?: FormFieldConfig<T>[];
 
@@ -57,7 +55,7 @@ export function OctaveAuthForm<T extends object>({
   const form = useForm<T>({ initialValues, validate });
 
   return (
-    <OctaveAuthWrapper branding={config.branding}>
+    <OctaveAuthWrapper {...config.wrapperProps}>
       <Center w="100%" h="100%">
         <Stack align="center">
           {config.icon}
@@ -108,8 +106,6 @@ export function OctaveAuthForm<T extends object>({
                 </Center>
               )}
 
-              <Divider />
-
               <Stack gap={8}>
                 <OctaveButton
                   btnProps={{
@@ -124,7 +120,7 @@ export function OctaveAuthForm<T extends object>({
                 {config.secondaryAction &&
                   (config.secondaryAction.linkLabel ? (
                     <OctaveLinkedText
-                      baseTextProps={{ ta: 'center', size: 'sm' }}
+                      baseTextProps={{ ta: 'center', size: 'xs' }}
                       label={config.secondaryAction.label}
                       link={config.secondaryAction.link || ''}
                       linkLabel={config.secondaryAction.linkLabel}

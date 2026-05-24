@@ -57,16 +57,16 @@ export function OctaveLinksGroup({
         display: link.hidden ? 'none' : 'block',
         textDecoration: 'none',
         fontWeight: 500,
-        padding: `5px ${theme.spacing.md}`,
+        padding: `7px ${theme.spacing.md}`,
         paddingLeft: theme.spacing.md,
         marginLeft: '25px',
-        fontSize: 'calc(var(--mantine-font-size-xs) * 1)',
+        fontSize: 'calc(var(--mantine-font-size-sm) * 1)',
         borderLeft: `${link.active ? '2px' : '1px'} solid ${
           link.active
             ? theme.colors.primary[6]
             : 'light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))'
         }`,
-        color: link.active ? theme.colors.primary[6] : undefined,
+        color: link.active ? theme.colors.primary[9] : undefined,
         backgroundColor:
           hoveredLink === link.label
             ? 'light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6))'

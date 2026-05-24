@@ -44,16 +44,16 @@ const dmSans = DM_Sans({
 });
 
 const primary: MantineColorsTuple = [
-  '#fdfce4',
-  '#f8f6d3',
-  '#f0ecaa',
-  '#e7e17c',
-  '#e0d856',
-  '#dbd33e',
-  '#d9d02f',
-  '#c0b820',
-  '#aaa317',
-  '#928d03',
+  '#ecefff',
+  '#d5dafb',
+  '#a9b1f1',
+  '#7a87e9',
+  '#5362e1',
+  '#3a4bdd',
+  '#2c40dc',
+  '#1f32c4',
+  '#182cb0',
+  '#0a259c',
 ];
 
 export const octaveTheme = createTheme({
